@@ -1,0 +1,287 @@
+{
+  "@@locale": "ja",
+  "appName": "Terrava",
+  "splashTagline": "どんな街でも理解できる",
+  "navHome": "ホーム",
+  "navExplore": "探索",
+  "navSaved": "保存済み",
+  "navProfile": "プロフィール",
+  "commonCancel": "キャンセル",
+  "commonCreate": "作成",
+  "commonDelete": "削除",
+  "commonContinue": "続ける",
+  "commonTryAgain": "再試行",
+  "commonDirections": "経路",
+  "commonSave": "保存",
+  "commonShare": "共有",
+  "commonSeeAll": "すべて見る",
+  "themeSystem": "システム",
+  "themeLight": "ライト",
+  "themeDark": "ダーク",
+  "unitsMetric": "メートル法（km）",
+  "unitsImperial": "ヤード・ポンド法（mi）",
+  "settingsTitle": "設定",
+  "settingsAppearance": "外観",
+  "settingsUnits": "単位",
+  "settingsLanguage": "言語",
+  "settingsCurrency": "通貨",
+  "settingsAboutTerrava": "Terravaについて",
+  "settingsHelp": "ヘルプ",
+  "settingsPrivacyPolicy": "プライバシーポリシー",
+  "settingsTermsOfService": "利用規約",
+  "notificationsPushTitle": "プッシュ通知",
+  "notificationsPushSubtitle": "保存した場所、ヒント、アカウントのアラート（Firebase経由）",
+  "notificationsEnabledTitle": "???????",
+  "notificationsEnabledBody": "Terrava??????????????????????????",
+  "notificationsPlaceSavedTitle": "Terrava???????",
+  "notificationsPlaceSavedBody": "{placeName}????????????????????????????",
+  "@notificationsPlaceSavedBody": {
+    "placeholders": {
+      "placeName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsAreaSavedTitle": "???????????",
+  "notificationsAreaSavedBody": "{areaName}??????????????????????????",
+  "@notificationsAreaSavedBody": {
+    "placeholders": {
+      "areaName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsWelcomeTitle": "Terrava?????",
+  "notificationsWelcomeBody": "?????????????????????????????????",
+  "notificationsGenericUpdate": "??????????",
+  "accountDelete": "アカウントを削除",
+  "accountDeleteQuestion": "アカウントを削除しますか？",
+  "accountDeleteWarning": "Terravaアカウントと保存データが完全に削除されます。",
+  "authWelcomeBack": "おかえりなさい",
+  "authSignInSubtitle": "サインインして街を保存し、探索を続けましょう。",
+  "authEmail": "メール",
+  "authPassword": "パスワード",
+  "authForgotPassword": "パスワードをお忘れですか？",
+  "authSignIn": "サインイン",
+  "authSignOut": "サインアウト",
+  "authContinueGoogle": "Googleで続ける",
+  "authContinueApple": "Appleで続ける",
+  "authCreateAccount": "アカウントを作成",
+  "authCreateAccountTitle": "アカウント作成",
+  "authSignUpSubtitle": "Terravaに参加して場所を保存し、次の街を計画しましょう。",
+  "authDisplayName": "表示名",
+  "authSignUp": "登録",
+  "authAccountCreated": "アカウントを作成しました。探索を始められます。",
+  "authAlreadyHaveAccount": "すでにアカウントをお持ちですか？サインイン",
+  "authResetPasswordTitle": "パスワードをリセット",
+  "authResetPasswordSubtitle": "メールアドレスを入力すると、リセットリンクをお送りします。",
+  "authSendResetLink": "リセットリンクを送信",
+  "authBackToSignIn": "サインインに戻る",
+  "validationInvalidEmail": "有効なメールアドレスを入力してください",
+  "validationPasswordMinLength": "6文字以上",
+  "onboardingDiscoverTitle": "どんな場所も発見",
+  "onboardingDiscoverBody": "都市、通り、ランドマーク、座標を検索して、その周辺の暮らしを見てみましょう。",
+  "onboardingNearbyTitle": "近くにあるものを知る",
+  "onboardingNearbyBody": "レストラン、病院、学校、銀行、市場、生活必需品 — 実際の判断のために整理されています。",
+  "onboardingPlanTitle": "明確に計画する",
+  "onboardingPlanBody": "街を保存し、エリアを比較し、自信を持って行動しましょう — 訪問や移住の前に。",
+  "onboardingSkip": "スキップ",
+  "onboardingGetStarted": "はじめる",
+  "homeTagline": "どんな街の周辺も発見",
+  "homeSearchHint": "都市、エリア、ランドマークを検索…",
+  "homeCategoriesTitle": "カテゴリ",
+  "homeCategoriesSubtitle": "周辺の必需品",
+  "homeNearbyTitle": "近く",
+  "homeNearbySubtitle": "あなたの近く",
+  "homeNoNearbyTitle": "近くの場所はまだありません",
+  "homeNoNearbyMessage": "位置情報を許可するか、検索を試してください。",
+  "homeRecentlyViewedTitle": "最近閲覧した項目",
+  "homeRecentlyViewedSubtitle": "アカウントのアクティビティから",
+  "homeNoRecentViews": "開いた場所がここに表示されます。",
+  "homePopularNearbyTitle": "近くの人気",
+  "homePopularNearbySubtitle": "周辺で高評価の場所",
+  "locationPermissionNeeded": "近くの場所には位置情報の許可が必要です",
+  "locationUsingCurrent": "現在地を使用しています",
+  "locationReadError": "位置情報を読み取れません",
+  "locationNeighborhood": "近隣",
+  "locationSaveArea": "エリアを保存",
+  "locationAreaSaved": "エリアを保存しました",
+  "locationNoRadiusResults": "この範囲に結果がありません",
+  "locationInsightsUnavailable": "インサイトを利用できません：{error}",
+  "@locationInsightsUnavailable": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "amenityScore": "アメニティスコア {score}/100",
+  "@amenityScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherSummary": "{temp}°C · {condition} · 体感 {feelsLike}°C · 湿度 {humidity}%",
+  "@weatherSummary": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      },
+      "condition": {
+        "type": "String"
+      },
+      "feelsLike": {
+        "type": "int"
+      },
+      "humidity": {
+        "type": "int"
+      }
+    }
+  },
+  "fxRate": "為替：1 {base} = {rate} {target}",
+  "@fxRate": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreSummary": "{area} の日常の利便性スコアは {overall}/100（アメニティへのアクセス — 犯罪や公式の住みやすさではありません）。最強：{strongest}。最弱：{weakest}。{radius} km以内：食料品店・薬局 {essentials}、健康関連 {health}、飲食 {food}、交通関連 {transport}。",
+  "@scoreSummary": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      },
+      "overall": {
+        "type": "int"
+      },
+      "strongest": {
+        "type": "String"
+      },
+      "weakest": {
+        "type": "String"
+      },
+      "radius": {
+        "type": "String"
+      },
+      "essentials": {
+        "type": "int"
+      },
+      "health": {
+        "type": "int"
+      },
+      "food": {
+        "type": "int"
+      },
+      "transport": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreEssentials": "必需品",
+  "scoreHealth": "健康",
+  "scoreFood": "食事",
+  "scoreTransport": "交通",
+  "scoreMoney": "銀行・ATM",
+  "scoreEducation": "教育",
+  "scoreFuel": "燃料",
+  "categoryRestaurants": "レストラン",
+  "categoryHotels": "ホテル",
+  "categoryHospitals": "病院",
+  "categoryBanks": "銀行",
+  "categoryPharmacies": "薬局",
+  "categorySchools": "学校",
+  "categorySupermarkets": "スーパー",
+  "categoryMarkets": "市場",
+  "categoryFuel": "燃料",
+  "categoryNoResultsTitle": "結果なし",
+  "categoryNoResultsMessage": "別のカテゴリを試すか、地図を移動してください。",
+  "mapClusterPlaces": "{count} 件の場所",
+  "@mapClusterPlaces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTapToZoom": "タップして拡大",
+  "mapSearchArea": "このエリアを検索",
+  "mapMyLocation": "現在地",
+  "savedTitle": "保存済み",
+  "savedSubtitle": "場所、近隣、コレクションがアカウントに同期されます。",
+  "savedCollectionsTitle": "コレクション",
+  "savedNewCollection": "新規",
+  "savedNoCollections": "コレクションはまだありません。",
+  "savedNeighborhoodsTitle": "近隣",
+  "savedNoAreas": "保存されたエリアはまだありません。",
+  "savedPlacesTitle": "場所",
+  "savedNoPlacesTitle": "保存された場所はありません",
+  "savedNoPlacesMessage": "詳細からレストランやホテルなどを保存できます。",
+  "collectionFallbackName": "コレクション",
+  "collectionNewTitle": "新しいコレクション",
+  "collectionNameHint": "名前",
+  "collectionDeleteTooltip": "コレクションを削除",
+  "collectionEmptyTitle": "空のコレクション",
+  "collectionEmptyMessage": "場所の詳細 → コレクションに保存から場所を追加します。",
+  "collectionSavedArea": "保存されたエリア",
+  "collectionCreateFirst": "先に保存済みでコレクションを作成してください",
+  "collectionAdded": "コレクションに追加しました",
+  "areaFallbackName": "エリア",
+  "placeFallbackName": "場所",
+  "placeOpenNow": "営業中",
+  "placeClosed": "閉店",
+  "placeSaved": "場所を保存しました",
+  "placeCollection": "コレクション",
+  "placeCall": "電話",
+  "placeWebsite": "ウェブサイト",
+  "placeHours": "営業時間",
+  "placeReviews": "レビュー",
+  "profileTitle": "プロフィール",
+  "profileFallbackName": "トラベラー",
+  "profileChangePhoto": "写真を変更",
+  "profileSettingsSubtitle": "単位、言語、通知、法務",
+  "profilePhotoUpdated": "プロフィール写真を更新しました",
+  "searchTitle": "検索",
+  "searchHint": "国、都市、通り、ランドマーク、緯度,経度",
+  "searchNoResults": "その検索の結果はありません",
+  "searchVoiceTooltip": "音声検索",
+  "searchVoiceDisabledTooltip": "音声検索（.envで有効化）",
+  "searchVoiceUnavailable": "マイク / 音声認識が利用できません",
+  "searchVoiceEnableInstruction": ".envでENABLE_VOICE_SEARCH=trueを設定して有効化",
+  "searchRecentTitle": "最近の検索",
+  "searchNoRecent": "最近の検索はまだありません。",
+  "searchPopularTitle": "人気の検索",
+  "searchNoPopular": "人気の検索は実際の利用から表示されます。",
+  "searchNoSuggestionsTitle": "候補なし",
+  "searchNoSuggestionsMessage": "都市、ランドマーク、または座標を試してください。",
+  "directionsLocationRequired": "経路には現在地が必要です",
+  "directionsNoRoute": "ルートが見つかりません",
+  "directionsOriginYou": "あなた",
+  "directionsDestination": "目的地",
+  "aboutTitle": "について",
+  "aboutDefaultDescription": "Terravaは、訪問・移住・居住の前に、どんな街でも理解できるようサポートします。",
+  "aboutVersion": "バージョン {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "ヘルプ",
+  "helpHowItWorksTitle": "Terravaの仕組み",
+  "helpHowItWorksBody": "地球上のあらゆる場所を検索し、地図で近くの必需品を探索し、近隣詳細でアメニティスコアを確認し、場所をアカウントに保存できます。",
+  "helpScoresTitle": "近隣スコア",
+  "helpScoresBody": "スコアはGoogle Placesの密度、評価、距離に基づく利便性・アメニティの推定です。犯罪、学校の質、公式の住みやすさの評価ではありません。",
+  "privacyBody": "Terravaは、アカウントプロフィール、保存した場所、検索履歴、オプションのプッシュトークンを、行レベルのセキュリティを備えたSupabaseに保存します。位置情報は端末上でGoogle APIから近くの場所を取得するために使用されます。個人データを販売することはありません。削除のご依頼はサポートまでご連絡ください。",
+  "termsBody": "Terravaは情報提供を目的とした近隣発見ツールを提供します。アメニティスコアは推定値であり、安全性や住みやすさの保証ではありません。サードパーティの地図・場所データは不完全または古い場合があります。適用法およびGoogle Maps / Placesの利用規約に従ってアプリをご利用ください。",
+  "errorGenericTitle": "問題が発生しました"
+}

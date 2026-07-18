@@ -1,0 +1,287 @@
+{
+  "@@locale": "ru",
+  "appName": "Terrava",
+  "splashTagline": "Поймите любой район",
+  "navHome": "Главная",
+  "navExplore": "Обзор",
+  "navSaved": "Сохранённое",
+  "navProfile": "Профиль",
+  "commonCancel": "Отмена",
+  "commonCreate": "Создать",
+  "commonDelete": "Удалить",
+  "commonContinue": "Продолжить",
+  "commonTryAgain": "Повторить",
+  "commonDirections": "Маршрут",
+  "commonSave": "Сохранить",
+  "commonShare": "Поделиться",
+  "commonSeeAll": "Смотреть все",
+  "themeSystem": "Системная",
+  "themeLight": "Светлая",
+  "themeDark": "Тёмная",
+  "unitsMetric": "Метрическая (км)",
+  "unitsImperial": "Имперская (мили)",
+  "settingsTitle": "Настройки",
+  "settingsAppearance": "Оформление",
+  "settingsUnits": "Единицы",
+  "settingsLanguage": "Язык",
+  "settingsCurrency": "Валюта",
+  "settingsAboutTerrava": "О Terrava",
+  "settingsHelp": "Справка",
+  "settingsPrivacyPolicy": "Политика конфиденциальности",
+  "settingsTermsOfService": "Условия использования",
+  "notificationsPushTitle": "Push-уведомления",
+  "notificationsPushSubtitle": "Сохранённые места, советы и оповещения аккаунта через Firebase",
+  "notificationsEnabledTitle": "??????????? ????????",
+  "notificationsEnabledBody": "Terrava ????? ?????????? ??? ? ??????????? ?????? ? ??????????? ????????.",
+  "notificationsPlaceSavedTitle": "????????? ? Terrava",
+  "notificationsPlaceSavedBody": "{placeName} ?????? ? ????? ??????. ???????? ????????????? ? ????? ?????, ????? ????????? ? ????.",
+  "@notificationsPlaceSavedBody": {
+    "placeholders": {
+      "placeName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsAreaSavedTitle": "????? ????????",
+  "notificationsAreaSavedBody": "{areaName} ????? ?????, ????? ?? ???????? ????? ???????? ??????.",
+  "@notificationsAreaSavedBody": {
+    "placeholders": {
+      "areaName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsWelcomeTitle": "????? ?????????? ? Terrava",
+  "notificationsWelcomeBody": "?????????? ??????, ?????????? ????? ? ????????? ???????? ?? ??????? ?????.",
+  "notificationsGenericUpdate": "? ??? ????? ??????????",
+  "accountDelete": "Удалить аккаунт",
+  "accountDeleteQuestion": "Удалить аккаунт?",
+  "accountDeleteWarning": "Это навсегда удалит ваш аккаунт Terrava и сохранённые данные.",
+  "authWelcomeBack": "С возвращением",
+  "authSignInSubtitle": "Войдите, чтобы сохранять районы и продолжать исследование.",
+  "authEmail": "Эл. почта",
+  "authPassword": "Пароль",
+  "authForgotPassword": "Забыли пароль?",
+  "authSignIn": "Войти",
+  "authSignOut": "Выйти",
+  "authContinueGoogle": "Продолжить с Google",
+  "authContinueApple": "Продолжить с Apple",
+  "authCreateAccount": "Создать аккаунт",
+  "authCreateAccountTitle": "Создать аккаунт",
+  "authSignUpSubtitle": "Присоединяйтесь к Terrava, чтобы сохранять места и планировать следующий район.",
+  "authDisplayName": "Отображаемое имя",
+  "authSignUp": "Зарегистрироваться",
+  "authAccountCreated": "Аккаунт создан. Можно начинать исследование.",
+  "authAlreadyHaveAccount": "Уже есть аккаунт? Войти",
+  "authResetPasswordTitle": "Сброс пароля",
+  "authResetPasswordSubtitle": "Введите эл. почту, и мы отправим ссылку для сброса.",
+  "authSendResetLink": "Отправить ссылку",
+  "authBackToSignIn": "Назад ко входу",
+  "validationInvalidEmail": "Введите корректный адрес эл. почты",
+  "validationPasswordMinLength": "Мин. 6 символов",
+  "onboardingDiscoverTitle": "Откройте любое место",
+  "onboardingDiscoverBody": "Ищите города, улицы, достопримечательности или координаты и смотрите, какова жизнь вокруг.",
+  "onboardingNearbyTitle": "Узнайте, что рядом",
+  "onboardingNearbyBody": "Рестораны, больницы, школы, банки, рынки и необходимое — организовано для реальных решений.",
+  "onboardingPlanTitle": "Планируйте ясно",
+  "onboardingPlanBody": "Сохраняйте районы, сравнивайте зоны и действуйте уверенно — до визита или переезда.",
+  "onboardingSkip": "Пропустить",
+  "onboardingGetStarted": "Начать",
+  "homeTagline": "Узнайте, что вокруг любого района",
+  "homeSearchHint": "Поиск города, района, достопримечательности…",
+  "homeCategoriesTitle": "Категории",
+  "homeCategoriesSubtitle": "Необходимое вокруг вас",
+  "homeNearbyTitle": "Рядом",
+  "homeNearbySubtitle": "Близко к вам",
+  "homeNoNearbyTitle": "Пока нет мест поблизости",
+  "homeNoNearbyMessage": "Разрешите геолокацию или попробуйте Поиск.",
+  "homeRecentlyViewedTitle": "Недавно просмотренные",
+  "homeRecentlyViewedSubtitle": "Из активности вашего аккаунта",
+  "homeNoRecentViews": "Открытые вами места появятся здесь.",
+  "homePopularNearbyTitle": "Популярное рядом",
+  "homePopularNearbySubtitle": "Высоко оценённые вокруг вас",
+  "locationPermissionNeeded": "Для мест поблизости нужно разрешение на геолокацию",
+  "locationUsingCurrent": "Используется ваше текущее местоположение",
+  "locationReadError": "Не удалось определить местоположение",
+  "locationNeighborhood": "Район",
+  "locationSaveArea": "Сохранить зону",
+  "locationAreaSaved": "Зона сохранена",
+  "locationNoRadiusResults": "Нет результатов в этом радиусе",
+  "locationInsightsUnavailable": "Аналитика недоступна: {error}",
+  "@locationInsightsUnavailable": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "amenityScore": "Оценка удобств {score}/100",
+  "@amenityScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherSummary": "{temp}°C · {condition} · ощущается как {feelsLike}°C · влажность {humidity}%",
+  "@weatherSummary": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      },
+      "condition": {
+        "type": "String"
+      },
+      "feelsLike": {
+        "type": "int"
+      },
+      "humidity": {
+        "type": "int"
+      }
+    }
+  },
+  "fxRate": "Курс: 1 {base} = {rate} {target}",
+  "@fxRate": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreSummary": "{area} набирает {overall}/100 за повседневное удобство (доступ к удобствам — не преступность и не официальная оценка комфортности). Сильнее всего: {strongest}. Слабее всего: {weakest}. В радиусе {radius} км: {essentials} вариантов магазинов/аптек, {health} мест, связанных со здоровьем, {food} мест питания, {transport} мест, связанных с транспортом.",
+  "@scoreSummary": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      },
+      "overall": {
+        "type": "int"
+      },
+      "strongest": {
+        "type": "String"
+      },
+      "weakest": {
+        "type": "String"
+      },
+      "radius": {
+        "type": "String"
+      },
+      "essentials": {
+        "type": "int"
+      },
+      "health": {
+        "type": "int"
+      },
+      "food": {
+        "type": "int"
+      },
+      "transport": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreEssentials": "Необходимое",
+  "scoreHealth": "Здоровье",
+  "scoreFood": "Еда",
+  "scoreTransport": "Транспорт",
+  "scoreMoney": "Банки и банкоматы",
+  "scoreEducation": "Образование",
+  "scoreFuel": "Топливо",
+  "categoryRestaurants": "Рестораны",
+  "categoryHotels": "Отели",
+  "categoryHospitals": "Больницы",
+  "categoryBanks": "Банки",
+  "categoryPharmacies": "Аптеки",
+  "categorySchools": "Школы",
+  "categorySupermarkets": "Супермаркеты",
+  "categoryMarkets": "Рынки",
+  "categoryFuel": "Топливо",
+  "categoryNoResultsTitle": "Нет результатов",
+  "categoryNoResultsMessage": "Попробуйте другую категорию или переместите карту.",
+  "mapClusterPlaces": "{count} мест",
+  "@mapClusterPlaces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTapToZoom": "Нажмите, чтобы увеличить",
+  "mapSearchArea": "Искать в этой зоне",
+  "mapMyLocation": "Моё местоположение",
+  "savedTitle": "Сохранённое",
+  "savedSubtitle": "Места, районы и коллекции синхронизированы с аккаунтом.",
+  "savedCollectionsTitle": "Коллекции",
+  "savedNewCollection": "Новая",
+  "savedNoCollections": "Пока нет коллекций.",
+  "savedNeighborhoodsTitle": "Районы",
+  "savedNoAreas": "Пока нет сохранённых зон.",
+  "savedPlacesTitle": "Места",
+  "savedNoPlacesTitle": "Нет сохранённых мест",
+  "savedNoPlacesMessage": "Сохраняйте рестораны, отели и другое из подробностей.",
+  "collectionFallbackName": "Коллекция",
+  "collectionNewTitle": "Новая коллекция",
+  "collectionNameHint": "Название",
+  "collectionDeleteTooltip": "Удалить коллекцию",
+  "collectionEmptyTitle": "Пустая коллекция",
+  "collectionEmptyMessage": "Добавляйте места из Подробностей места → Сохранить в коллекцию.",
+  "collectionSavedArea": "Сохранённая зона",
+  "collectionCreateFirst": "Сначала создайте коллекцию в Сохранённом",
+  "collectionAdded": "Добавлено в коллекцию",
+  "areaFallbackName": "Зона",
+  "placeFallbackName": "Место",
+  "placeOpenNow": "Сейчас открыто",
+  "placeClosed": "Закрыто",
+  "placeSaved": "Место сохранено",
+  "placeCollection": "Коллекция",
+  "placeCall": "Позвонить",
+  "placeWebsite": "Сайт",
+  "placeHours": "Часы работы",
+  "placeReviews": "Отзывы",
+  "profileTitle": "Профиль",
+  "profileFallbackName": "Путешественник",
+  "profileChangePhoto": "Сменить фото",
+  "profileSettingsSubtitle": "Единицы, язык, уведомления, юридическое",
+  "profilePhotoUpdated": "Фото профиля обновлено",
+  "searchTitle": "Поиск",
+  "searchHint": "Страна, город, улица, достопримечательность, шир.,долг.",
+  "searchNoResults": "Нет результатов по этому запросу",
+  "searchVoiceTooltip": "Голосовой поиск",
+  "searchVoiceDisabledTooltip": "Голосовой поиск (включите в .env)",
+  "searchVoiceUnavailable": "Микрофон / речь недоступны",
+  "searchVoiceEnableInstruction": "Установите ENABLE_VOICE_SEARCH=true в .env для включения",
+  "searchRecentTitle": "Недавние поиски",
+  "searchNoRecent": "Пока нет недавних поисков.",
+  "searchPopularTitle": "Популярные поиски",
+  "searchNoPopular": "Популярные поиски появятся из реального использования.",
+  "searchNoSuggestionsTitle": "Нет подсказок",
+  "searchNoSuggestionsMessage": "Попробуйте город, достопримечательность или координаты.",
+  "directionsLocationRequired": "Для маршрута нужно текущее местоположение",
+  "directionsNoRoute": "Маршрут не найден",
+  "directionsOriginYou": "Вы",
+  "directionsDestination": "Пункт назначения",
+  "aboutTitle": "О приложении",
+  "aboutDefaultDescription": "Terrava помогает понять любой район до визита, переезда или проживания там.",
+  "aboutVersion": "Версия {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "Справка",
+  "helpHowItWorksTitle": "Как работает Terrava",
+  "helpHowItWorksBody": "Ищите любое место на Земле, изучайте необходимое рядом на карте, открывайте подробности района для оценок удобств и сохраняйте места в аккаунт.",
+  "helpScoresTitle": "Оценки района",
+  "helpScoresBody": "Оценки — это оценки удобства/удобств по плотности Google Places, рейтингам и расстоянию. Это не оценки преступности, качества школ или официальной комфортности жизни.",
+  "privacyBody": "Terrava хранит профиль аккаунта, сохранённые места, историю поиска и необязательные push-токены в Supabase с безопасностью на уровне строк. Геолокация используется на устройстве для получения мест поблизости через Google API. Мы не продаём персональные данные. Обращайтесь в поддержку по запросам на удаление.",
+  "termsBody": "Terrava предоставляет инструменты для изучения районов в информационных целях. Оценки удобств — это оценки, а не гарантии безопасности или комфортности жизни. Картографические и данные о местах от третьих сторон могут быть неполными или устаревшими. Используйте приложение в соответствии с применимыми законами и условиями Google Maps / Places.",
+  "errorGenericTitle": "Что-то пошло не так"
+}

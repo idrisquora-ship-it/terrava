@@ -1,0 +1,287 @@
+{
+  "@@locale": "ar",
+  "appName": "Terrava",
+  "splashTagline": "افهم أي حيّ",
+  "navHome": "الرئيسية",
+  "navExplore": "استكشف",
+  "navSaved": "المحفوظات",
+  "navProfile": "الملف الشخصي",
+  "commonCancel": "إلغاء",
+  "commonCreate": "إنشاء",
+  "commonDelete": "حذف",
+  "commonContinue": "متابعة",
+  "commonTryAgain": "حاول مرة أخرى",
+  "commonDirections": "الاتجاهات",
+  "commonSave": "حفظ",
+  "commonShare": "مشاركة",
+  "commonSeeAll": "عرض الكل",
+  "themeSystem": "النظام",
+  "themeLight": "فاتح",
+  "themeDark": "داكن",
+  "unitsMetric": "متري (كم)",
+  "unitsImperial": "إمبراطوري (ميل)",
+  "settingsTitle": "الإعدادات",
+  "settingsAppearance": "المظهر",
+  "settingsUnits": "الوحدات",
+  "settingsLanguage": "اللغة",
+  "settingsCurrency": "العملة",
+  "settingsAboutTerrava": "حول Terrava",
+  "settingsHelp": "المساعدة",
+  "settingsPrivacyPolicy": "سياسة الخصوصية",
+  "settingsTermsOfService": "شروط الخدمة",
+  "notificationsPushTitle": "إشعارات الدفع",
+  "notificationsPushSubtitle": "الأماكن المحفوظة والنصائح وتنبيهات الحساب عبر Firebase",
+  "notificationsEnabledTitle": "?? ????? ?????????",
+  "notificationsEnabledBody": "???? ?? Terrava ?????? ???? ??????? ???????? ???????? ??????.",
+  "notificationsPlaceSavedTitle": "?? ????? ?? Terrava",
+  "notificationsPlaceSavedBody": "{placeName} ????? ?? ??????. ???? ????????? ?? ?? ??? ?????? ????.",
+  "@notificationsPlaceSavedBody": {
+    "placeholders": {
+      "placeName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsAreaSavedTitle": "?? ??? ?????",
+  "notificationsAreaSavedBody": "{areaName} ???? ????? ???? ?? ?????? ??????? ??? ????.",
+  "@notificationsAreaSavedBody": {
+    "placeholders": {
+      "areaName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsWelcomeTitle": "?????? ?? ?? Terrava",
+  "notificationsWelcomeBody": "?????? ???????? ????? ???????? ????? ??? ??? ??????? ?????? ???.",
+  "notificationsGenericUpdate": "???? ????? ????",
+  "accountDelete": "حذف الحساب",
+  "accountDeleteQuestion": "حذف الحساب؟",
+  "accountDeleteWarning": "يؤدي هذا إلى حذف حساب Terrava وبياناتك المحفوظة نهائياً.",
+  "authWelcomeBack": "مرحباً بعودتك",
+  "authSignInSubtitle": "سجّل الدخول لحفظ الأحياء ومتابعة الاستكشاف.",
+  "authEmail": "البريد الإلكتروني",
+  "authPassword": "كلمة المرور",
+  "authForgotPassword": "نسيت كلمة المرور؟",
+  "authSignIn": "تسجيل الدخول",
+  "authSignOut": "تسجيل الخروج",
+  "authContinueGoogle": "المتابعة مع Google",
+  "authContinueApple": "المتابعة مع Apple",
+  "authCreateAccount": "إنشاء حساب",
+  "authCreateAccountTitle": "إنشاء حساب",
+  "authSignUpSubtitle": "انضم إلى Terrava لحفظ الأماكن وتخطيط حيّك القادم.",
+  "authDisplayName": "اسم العرض",
+  "authSignUp": "إنشاء حساب",
+  "authAccountCreated": "تم إنشاء الحساب. يمكنك البدء بالاستكشاف.",
+  "authAlreadyHaveAccount": "لديك حساب بالفعل؟ سجّل الدخول",
+  "authResetPasswordTitle": "إعادة تعيين كلمة المرور",
+  "authResetPasswordSubtitle": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.",
+  "authSendResetLink": "إرسال رابط إعادة التعيين",
+  "authBackToSignIn": "العودة لتسجيل الدخول",
+  "validationInvalidEmail": "أدخل بريداً إلكترونياً صالحاً",
+  "validationPasswordMinLength": "٦ أحرف على الأقل",
+  "onboardingDiscoverTitle": "اكتشف أي مكان",
+  "onboardingDiscoverBody": "ابحث عن مدن أو شوارع أو معالم أو إحداثيات وشاهد كيف تبدو الحياة من حولها.",
+  "onboardingNearbyTitle": "اعرف ما حولك",
+  "onboardingNearbyBody": "مطاعم ومستشفيات ومدارس وبنوك وأسواق وأساسيات — منظمة لاتخاذ قرارات حقيقية.",
+  "onboardingPlanTitle": "خطّط بوضوح",
+  "onboardingPlanBody": "احفظ الأحياء، قارن المناطق، وانتقل بثقة — قبل الزيارة أو الانتقال.",
+  "onboardingSkip": "تخطّي",
+  "onboardingGetStarted": "ابدأ الآن",
+  "homeTagline": "اكتشف ما يحيط بأي حيّ",
+  "homeSearchHint": "ابحث عن مدينة أو منطقة أو معلم…",
+  "homeCategoriesTitle": "الفئات",
+  "homeCategoriesSubtitle": "الأساسيات من حولك",
+  "homeNearbyTitle": "بالقرب",
+  "homeNearbySubtitle": "قريب منك",
+  "homeNoNearbyTitle": "لا توجد أماكن قريبة بعد",
+  "homeNoNearbyMessage": "اسمح بالموقع أو جرّب البحث.",
+  "homeRecentlyViewedTitle": "شوهدت مؤخراً",
+  "homeRecentlyViewedSubtitle": "من نشاط حسابك",
+  "homeNoRecentViews": "ستظهر هنا الأماكن التي تفتحها.",
+  "homePopularNearbyTitle": "الأكثر شعبية بالقرب",
+  "homePopularNearbySubtitle": "تقييمات عالية من حولك",
+  "locationPermissionNeeded": "يلزم إذن الموقع للأماكن القريبة",
+  "locationUsingCurrent": "جارٍ استخدام موقعك الحالي",
+  "locationReadError": "تعذّر قراءة الموقع",
+  "locationNeighborhood": "الحيّ",
+  "locationSaveArea": "حفظ المنطقة",
+  "locationAreaSaved": "تم حفظ المنطقة",
+  "locationNoRadiusResults": "لا توجد نتائج ضمن هذا النطاق",
+  "locationInsightsUnavailable": "التحليلات غير متاحة: {error}",
+  "@locationInsightsUnavailable": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "amenityScore": "درجة المرافق {score}/100",
+  "@amenityScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherSummary": "{temp}°م · {condition} · الإحساس {feelsLike}°م · الرطوبة {humidity}%",
+  "@weatherSummary": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      },
+      "condition": {
+        "type": "String"
+      },
+      "feelsLike": {
+        "type": "int"
+      },
+      "humidity": {
+        "type": "int"
+      }
+    }
+  },
+  "fxRate": "سعر الصرف: 1 {base} = {rate} {target}",
+  "@fxRate": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreSummary": "تحصل {area} على {overall}/100 لراحة الحياة اليومية (الوصول للمرافق — وليس الجريمة أو قابلية العيش الرسمية). الأقوى: {strongest}. الأضعف: {weakest}. ضمن {radius} كم: {essentials} خيارات بقالة/صيدلية، {health} أماكن صحية، {food} أماكن طعام، {transport} أماكن نقل.",
+  "@scoreSummary": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      },
+      "overall": {
+        "type": "int"
+      },
+      "strongest": {
+        "type": "String"
+      },
+      "weakest": {
+        "type": "String"
+      },
+      "radius": {
+        "type": "String"
+      },
+      "essentials": {
+        "type": "int"
+      },
+      "health": {
+        "type": "int"
+      },
+      "food": {
+        "type": "int"
+      },
+      "transport": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreEssentials": "الأساسيات",
+  "scoreHealth": "الصحة",
+  "scoreFood": "الطعام",
+  "scoreTransport": "النقل",
+  "scoreMoney": "البنوك وأجهزة الصراف",
+  "scoreEducation": "التعليم",
+  "scoreFuel": "الوقود",
+  "categoryRestaurants": "المطاعم",
+  "categoryHotels": "الفنادق",
+  "categoryHospitals": "المستشفيات",
+  "categoryBanks": "البنوك",
+  "categoryPharmacies": "الصيدليات",
+  "categorySchools": "المدارس",
+  "categorySupermarkets": "السوبرماركت",
+  "categoryMarkets": "الأسواق",
+  "categoryFuel": "الوقود",
+  "categoryNoResultsTitle": "لا توجد نتائج",
+  "categoryNoResultsMessage": "جرّب فئة أخرى أو حرّك الخريطة.",
+  "mapClusterPlaces": "{count} أماكن",
+  "@mapClusterPlaces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTapToZoom": "اضغط للتكبير",
+  "mapSearchArea": "البحث في هذه المنطقة",
+  "mapMyLocation": "موقعي",
+  "savedTitle": "المحفوظات",
+  "savedSubtitle": "أماكن وأحياء ومجموعات متزامنة مع حسابك.",
+  "savedCollectionsTitle": "المجموعات",
+  "savedNewCollection": "جديد",
+  "savedNoCollections": "لا توجد مجموعات بعد.",
+  "savedNeighborhoodsTitle": "الأحياء",
+  "savedNoAreas": "لا توجد مناطق محفوظة بعد.",
+  "savedPlacesTitle": "الأماكن",
+  "savedNoPlacesTitle": "لا توجد أماكن محفوظة",
+  "savedNoPlacesMessage": "احفظ المطاعم والفنادق والمزيد من صفحة التفاصيل.",
+  "collectionFallbackName": "مجموعة",
+  "collectionNewTitle": "مجموعة جديدة",
+  "collectionNameHint": "الاسم",
+  "collectionDeleteTooltip": "حذف المجموعة",
+  "collectionEmptyTitle": "مجموعة فارغة",
+  "collectionEmptyMessage": "أضف أماكن من تفاصيل المكان ← حفظ في مجموعة.",
+  "collectionSavedArea": "منطقة محفوظة",
+  "collectionCreateFirst": "أنشئ مجموعة في المحفوظات أولاً",
+  "collectionAdded": "تمت الإضافة إلى المجموعة",
+  "areaFallbackName": "منطقة",
+  "placeFallbackName": "مكان",
+  "placeOpenNow": "مفتوح الآن",
+  "placeClosed": "مغلق",
+  "placeSaved": "تم حفظ المكان",
+  "placeCollection": "مجموعة",
+  "placeCall": "اتصال",
+  "placeWebsite": "الموقع الإلكتروني",
+  "placeHours": "ساعات العمل",
+  "placeReviews": "المراجعات",
+  "profileTitle": "الملف الشخصي",
+  "profileFallbackName": "مسافر",
+  "profileChangePhoto": "تغيير الصورة",
+  "profileSettingsSubtitle": "الوحدات واللغة والإشعارات والقانوني",
+  "profilePhotoUpdated": "تم تحديث صورة الملف الشخصي",
+  "searchTitle": "بحث",
+  "searchHint": "بلد، مدينة، شارع، معلم، خط عرض،خط طول",
+  "searchNoResults": "لا توجد نتائج لهذا البحث",
+  "searchVoiceTooltip": "البحث الصوتي",
+  "searchVoiceDisabledTooltip": "البحث الصوتي (فعّله في .env)",
+  "searchVoiceUnavailable": "الميكروفون / الكلام غير متاح",
+  "searchVoiceEnableInstruction": "اضبط ENABLE_VOICE_SEARCH=true في .env للتفعيل",
+  "searchRecentTitle": "عمليات البحث الأخيرة",
+  "searchNoRecent": "لا توجد عمليات بحث حديثة بعد.",
+  "searchPopularTitle": "عمليات البحث الشائعة",
+  "searchNoPopular": "ستظهر عمليات البحث الشائعة من الاستخدام الفعلي.",
+  "searchNoSuggestionsTitle": "لا اقتراحات",
+  "searchNoSuggestionsMessage": "جرّب مدينة أو معلماً أو إحداثيات.",
+  "directionsLocationRequired": "الموقع الحالي مطلوب للاتجاهات",
+  "directionsNoRoute": "لم يُعثر على مسار",
+  "directionsOriginYou": "أنت",
+  "directionsDestination": "الوجهة",
+  "aboutTitle": "حول",
+  "aboutDefaultDescription": "يساعد Terrava أي شخص على فهم أي حيّ قبل زيارته أو الانتقال إليه أو العيش فيه.",
+  "aboutVersion": "الإصدار {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "المساعدة",
+  "helpHowItWorksTitle": "كيف يعمل Terrava",
+  "helpHowItWorksBody": "ابحث عن أي مكان على الأرض، واستكشف الأساسيات القريبة على الخريطة، وافتح تفاصيل الحي لدرجات المرافق، واحفظ الأماكن في حسابك.",
+  "helpScoresTitle": "درجات الحيّ",
+  "helpScoresBody": "الدرجات تقديرات للراحة/المرافق من كثافة Google Places والتقييمات والمسافة. ليست مؤشرات للجريمة أو جودة المدارس أو قابلية العيش الرسمية.",
+  "privacyBody": "يخزّن Terrava ملف حسابك والأماكن المحفوظة وسجل البحث ورموز الإشعارات الاختيارية في Supabase مع أمان على مستوى الصفوف. يُستخدم الموقع على الجهاز لجلب الأماكن القريبة من واجهات Google. نحن لا نبيع البيانات الشخصية. تواصل مع الدعم لطلبات الحذف.",
+  "termsBody": "يوفر Terrava أدوات اكتشاف الأحياء لأغراض معلوماتية. درجات المرافق تقديرات وليست ضمانات للسلامة أو جودة المعيشة. قد تكون بيانات الخرائط والأماكن من أطراف ثالثة غير مكتملة أو قديمة. استخدم التطبيق وفق القوانين المعمول بها وشروط Google Maps / Places.",
+  "errorGenericTitle": "حدث خطأ ما"
+}

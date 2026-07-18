@@ -1,0 +1,287 @@
+{
+  "@@locale": "nl",
+  "appName": "Terrava",
+  "splashTagline": "Begrijp elke buurt",
+  "navHome": "Home",
+  "navExplore": "Ontdekken",
+  "navSaved": "Opgeslagen",
+  "navProfile": "Profiel",
+  "commonCancel": "Annuleren",
+  "commonCreate": "Maken",
+  "commonDelete": "Verwijderen",
+  "commonContinue": "Doorgaan",
+  "commonTryAgain": "Opnieuw proberen",
+  "commonDirections": "Route",
+  "commonSave": "Opslaan",
+  "commonShare": "Delen",
+  "commonSeeAll": "Alles zien",
+  "themeSystem": "Systeem",
+  "themeLight": "Licht",
+  "themeDark": "Donker",
+  "unitsMetric": "Metrisch (km)",
+  "unitsImperial": "Imperiaal (mi)",
+  "settingsTitle": "Instellingen",
+  "settingsAppearance": "Weergave",
+  "settingsUnits": "Eenheden",
+  "settingsLanguage": "Taal",
+  "settingsCurrency": "Valuta",
+  "settingsAboutTerrava": "Over Terrava",
+  "settingsHelp": "Help",
+  "settingsPrivacyPolicy": "Privacybeleid",
+  "settingsTermsOfService": "Servicevoorwaarden",
+  "notificationsPushTitle": "Pushmeldingen",
+  "notificationsPushSubtitle": "Opgeslagen plekken, tips en accountmeldingen via Firebase",
+  "notificationsEnabledTitle": "Meldingen ingeschakeld",
+  "notificationsEnabledBody": "Terrava kan je waarschuwen over opgeslagen plekken en accountupdates.",
+  "notificationsPlaceSavedTitle": "Opgeslagen in Terrava",
+  "notificationsPlaceSavedBody": "{placeName} staat in je lijst. Open Opgeslagen wanneer je het opnieuw wilt bekijken.",
+  "@notificationsPlaceSavedBody": {
+    "placeholders": {
+      "placeName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsAreaSavedTitle": "Buurt opgeslagen",
+  "notificationsAreaSavedBody": "{areaName} staat klaar wanneer je de scores opnieuw wilt vergelijken.",
+  "@notificationsAreaSavedBody": {
+    "placeholders": {
+      "areaName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsWelcomeTitle": "Welkom bij Terrava",
+  "notificationsWelcomeBody": "Ontdek buurten, sla plekken op en krijg score-inzichten in de buurt.",
+  "notificationsGenericUpdate": "Je hebt een nieuwe update",
+  "accountDelete": "Account verwijderen",
+  "accountDeleteQuestion": "Account verwijderen?",
+  "accountDeleteWarning": "Dit verwijdert permanent je Terrava-account en opgeslagen gegevens.",
+  "authWelcomeBack": "Welkom terug",
+  "authSignInSubtitle": "Log in om buurten op te slaan en verder te verkennen.",
+  "authEmail": "E-mail",
+  "authPassword": "Wachtwoord",
+  "authForgotPassword": "Wachtwoord vergeten?",
+  "authSignIn": "Inloggen",
+  "authSignOut": "Uitloggen",
+  "authContinueGoogle": "Doorgaan met Google",
+  "authContinueApple": "Doorgaan met Apple",
+  "authCreateAccount": "Account aanmaken",
+  "authCreateAccountTitle": "Account aanmaken",
+  "authSignUpSubtitle": "Word lid van Terrava om plekken op te slaan en je volgende buurt te plannen.",
+  "authDisplayName": "Weergavenaam",
+  "authSignUp": "Registreren",
+  "authAccountCreated": "Account aangemaakt. Je kunt beginnen met verkennen.",
+  "authAlreadyHaveAccount": "Heb je al een account? Inloggen",
+  "authResetPasswordTitle": "Wachtwoord resetten",
+  "authResetPasswordSubtitle": "Voer je e-mail in en we sturen een resetlink.",
+  "authSendResetLink": "Resetlink versturen",
+  "authBackToSignIn": "Terug naar inloggen",
+  "validationInvalidEmail": "Voer een geldig e-mailadres in",
+  "validationPasswordMinLength": "Min. 6 tekens",
+  "onboardingDiscoverTitle": "Ontdek elke plek",
+  "onboardingDiscoverBody": "Zoek steden, straten, bezienswaardigheden of coördinaten en zie hoe het leven eromheen is.",
+  "onboardingNearbyTitle": "Weet wat er in de buurt is",
+  "onboardingNearbyBody": "Restaurants, ziekenhuizen, scholen, banken, markten en essentials — georganiseerd voor echte beslissingen.",
+  "onboardingPlanTitle": "Plan met duidelijkheid",
+  "onboardingPlanBody": "Sla buurten op, vergelijk gebieden en ga met vertrouwen verder — voordat je bezoekt of verhuist.",
+  "onboardingSkip": "Overslaan",
+  "onboardingGetStarted": "Aan de slag",
+  "homeTagline": "Ontdek wat er rond elke buurt is",
+  "homeSearchHint": "Zoek stad, gebied, bezienswaardigheid…",
+  "homeCategoriesTitle": "Categorieën",
+  "homeCategoriesSubtitle": "Essentials om je heen",
+  "homeNearbyTitle": "In de buurt",
+  "homeNearbySubtitle": "Dicht bij jou",
+  "homeNoNearbyTitle": "Nog geen plekken in de buurt",
+  "homeNoNearbyMessage": "Sta locatie toe of probeer Zoeken.",
+  "homeRecentlyViewedTitle": "Recent bekeken",
+  "homeRecentlyViewedSubtitle": "Uit je accountactiviteit",
+  "homeNoRecentViews": "Plekken die je opent verschijnen hier.",
+  "homePopularNearbyTitle": "Populair in de buurt",
+  "homePopularNearbySubtitle": "Hoog gewaardeerd om je heen",
+  "locationPermissionNeeded": "Locatietoestemming nodig voor plekken in de buurt",
+  "locationUsingCurrent": "Je huidige locatie wordt gebruikt",
+  "locationReadError": "Locatie kan niet worden gelezen",
+  "locationNeighborhood": "Buurt",
+  "locationSaveArea": "Gebied opslaan",
+  "locationAreaSaved": "Gebied opgeslagen",
+  "locationNoRadiusResults": "Geen resultaten in deze straal",
+  "locationInsightsUnavailable": "Inzichten niet beschikbaar: {error}",
+  "@locationInsightsUnavailable": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "amenityScore": "Voorzieningenscore {score}/100",
+  "@amenityScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherSummary": "{temp}°C · {condition} · gevoel {feelsLike}°C · luchtvochtigheid {humidity}%",
+  "@weatherSummary": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      },
+      "condition": {
+        "type": "String"
+      },
+      "feelsLike": {
+        "type": "int"
+      },
+      "humidity": {
+        "type": "int"
+      }
+    }
+  },
+  "fxRate": "Wisselkoers: 1 {base} = {rate} {target}",
+  "@fxRate": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreSummary": "{area} scoort {overall}/100 voor dagelijkse gemakkelijkheid (toegang tot voorzieningen — geen criminaliteit of officiële leefbaarheid). Sterkst: {strongest}. Zwakst: {weakest}. Binnen {radius} km: {essentials} boodschappen/apotheek-opties, {health} gezondheidsgerelateerde plekken, {food} eetgelegenheden, {transport} vervoersgerelateerde plekken.",
+  "@scoreSummary": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      },
+      "overall": {
+        "type": "int"
+      },
+      "strongest": {
+        "type": "String"
+      },
+      "weakest": {
+        "type": "String"
+      },
+      "radius": {
+        "type": "String"
+      },
+      "essentials": {
+        "type": "int"
+      },
+      "health": {
+        "type": "int"
+      },
+      "food": {
+        "type": "int"
+      },
+      "transport": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreEssentials": "Essentials",
+  "scoreHealth": "Gezondheid",
+  "scoreFood": "Eten",
+  "scoreTransport": "Vervoer",
+  "scoreMoney": "Banken & geldautomaten",
+  "scoreEducation": "Onderwijs",
+  "scoreFuel": "Brandstof",
+  "categoryRestaurants": "Restaurants",
+  "categoryHotels": "Hotels",
+  "categoryHospitals": "Ziekenhuizen",
+  "categoryBanks": "Banken",
+  "categoryPharmacies": "Apotheken",
+  "categorySchools": "Scholen",
+  "categorySupermarkets": "Supermarkten",
+  "categoryMarkets": "Markten",
+  "categoryFuel": "Brandstof",
+  "categoryNoResultsTitle": "Geen resultaten",
+  "categoryNoResultsMessage": "Probeer een andere categorie of verplaats de kaart.",
+  "mapClusterPlaces": "{count} plekken",
+  "@mapClusterPlaces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTapToZoom": "Tik om te zoomen",
+  "mapSearchArea": "Zoek in dit gebied",
+  "mapMyLocation": "Mijn locatie",
+  "savedTitle": "Opgeslagen",
+  "savedSubtitle": "Plekken, buurten en collecties gesynchroniseerd met je account.",
+  "savedCollectionsTitle": "Collecties",
+  "savedNewCollection": "Nieuw",
+  "savedNoCollections": "Nog geen collecties.",
+  "savedNeighborhoodsTitle": "Buurten",
+  "savedNoAreas": "Nog geen opgeslagen gebieden.",
+  "savedPlacesTitle": "Plekken",
+  "savedNoPlacesTitle": "Geen opgeslagen plekken",
+  "savedNoPlacesMessage": "Sla restaurants, hotels en meer op vanuit details.",
+  "collectionFallbackName": "Collectie",
+  "collectionNewTitle": "Nieuwe collectie",
+  "collectionNameHint": "Naam",
+  "collectionDeleteTooltip": "Collectie verwijderen",
+  "collectionEmptyTitle": "Lege collectie",
+  "collectionEmptyMessage": "Voeg plekken toe via Plekdetails → Opslaan in collectie.",
+  "collectionSavedArea": "Opgeslagen gebied",
+  "collectionCreateFirst": "Maak eerst een collectie in Opgeslagen",
+  "collectionAdded": "Toegevoegd aan collectie",
+  "areaFallbackName": "Gebied",
+  "placeFallbackName": "Plek",
+  "placeOpenNow": "Nu open",
+  "placeClosed": "Gesloten",
+  "placeSaved": "Plek opgeslagen",
+  "placeCollection": "Collectie",
+  "placeCall": "Bellen",
+  "placeWebsite": "Website",
+  "placeHours": "Openingstijden",
+  "placeReviews": "Beoordelingen",
+  "profileTitle": "Profiel",
+  "profileFallbackName": "Reiziger",
+  "profileChangePhoto": "Foto wijzigen",
+  "profileSettingsSubtitle": "Eenheden, taal, meldingen, juridisch",
+  "profilePhotoUpdated": "Profielfoto bijgewerkt",
+  "searchTitle": "Zoeken",
+  "searchHint": "Land, stad, straat, bezienswaardigheid, lat,lng",
+  "searchNoResults": "Geen resultaten voor die zoekopdracht",
+  "searchVoiceTooltip": "Spraakzoeken",
+  "searchVoiceDisabledTooltip": "Spraakzoeken (inschakelen in .env)",
+  "searchVoiceUnavailable": "Microfoon / spraak niet beschikbaar",
+  "searchVoiceEnableInstruction": "Stel ENABLE_VOICE_SEARCH=true in .env in om in te schakelen",
+  "searchRecentTitle": "Recente zoekopdrachten",
+  "searchNoRecent": "Nog geen recente zoekopdrachten.",
+  "searchPopularTitle": "Populaire zoekopdrachten",
+  "searchNoPopular": "Populaire zoekopdrachten verschijnen door echt gebruik.",
+  "searchNoSuggestionsTitle": "Geen suggesties",
+  "searchNoSuggestionsMessage": "Probeer een stad, bezienswaardigheid of coördinaten.",
+  "directionsLocationRequired": "Huidige locatie vereist voor route",
+  "directionsNoRoute": "Geen route gevonden",
+  "directionsOriginYou": "Jij",
+  "directionsDestination": "Bestemming",
+  "aboutTitle": "Over",
+  "aboutDefaultDescription": "Terrava helpt iedereen elke buurt te begrijpen voordat je er naartoe gaat, naartoe verhuist of er woont.",
+  "aboutVersion": "Versie {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "Help",
+  "helpHowItWorksTitle": "Hoe Terrava werkt",
+  "helpHowItWorksBody": "Zoek elke plek op aarde, verken essentials in de buurt op de kaart, open buurtdetails voor voorzieningenscores en sla plekken op in je account.",
+  "helpScoresTitle": "Buurtscores",
+  "helpScoresBody": "Scores zijn schattingen van gemak/voorzieningen op basis van Google Places-dichtheid, beoordelingen en afstand. Het zijn geen criminaliteits-, schoolkwaliteits- of officiële leefbaarheidsscores.",
+  "privacyBody": "Terrava bewaart je accountprofiel, opgeslagen plekken, zoekgeschiedenis en optionele push-tokens in Supabase met beveiliging op rijniveau. Locatie wordt op het apparaat gebruikt om plekken in de buurt via Google-API's op te halen. We verkopen geen persoonlijke gegevens. Neem contact op met support voor verwijderingsverzoeken.",
+  "termsBody": "Terrava biedt tools voor buurtontdekking ter informatie. Voorzieningenscores zijn schattingen, geen garanties voor veiligheid of leefbaarheid. Kaart- en plaatsgegevens van derden kunnen onvolledig of verouderd zijn. Gebruik de app in overeenstemming met toepasselijke wetten en de voorwaarden van Google Maps / Places.",
+  "errorGenericTitle": "Er is iets misgegaan"
+}

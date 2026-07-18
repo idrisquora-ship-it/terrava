@@ -1,0 +1,287 @@
+{
+  "@@locale": "pt",
+  "appName": "Terrava",
+  "splashTagline": "Entenda qualquer bairro",
+  "navHome": "Início",
+  "navExplore": "Explorar",
+  "navSaved": "Salvos",
+  "navProfile": "Perfil",
+  "commonCancel": "Cancelar",
+  "commonCreate": "Criar",
+  "commonDelete": "Excluir",
+  "commonContinue": "Continuar",
+  "commonTryAgain": "Tentar novamente",
+  "commonDirections": "Direções",
+  "commonSave": "Salvar",
+  "commonShare": "Compartilhar",
+  "commonSeeAll": "Ver tudo",
+  "themeSystem": "Sistema",
+  "themeLight": "Claro",
+  "themeDark": "Escuro",
+  "unitsMetric": "Métrico (km)",
+  "unitsImperial": "Imperial (mi)",
+  "settingsTitle": "Configurações",
+  "settingsAppearance": "Aparência",
+  "settingsUnits": "Unidades",
+  "settingsLanguage": "Idioma",
+  "settingsCurrency": "Moeda",
+  "settingsAboutTerrava": "Sobre o Terrava",
+  "settingsHelp": "Ajuda",
+  "settingsPrivacyPolicy": "Política de Privacidade",
+  "settingsTermsOfService": "Termos de Serviço",
+  "notificationsPushTitle": "Notificações push",
+  "notificationsPushSubtitle": "Lugares salvos, dicas e alertas da conta via Firebase",
+  "notificationsEnabledTitle": "Notifica??es ativadas",
+  "notificationsEnabledBody": "O Terrava pode alertar voc? sobre lugares salvos e atualiza??es da conta.",
+  "notificationsPlaceSavedTitle": "Salvo no Terrava",
+  "notificationsPlaceSavedBody": "{placeName} est? na sua lista. Abra Salvos quando quiser para visitar de novo.",
+  "@notificationsPlaceSavedBody": {
+    "placeholders": {
+      "placeName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsAreaSavedTitle": "Bairro salvo",
+  "notificationsAreaSavedBody": "{areaName} estar? pronto quando voc? quiser comparar pontua??es novamente.",
+  "@notificationsAreaSavedBody": {
+    "placeholders": {
+      "areaName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsWelcomeTitle": "Bem-vindo ao Terrava",
+  "notificationsWelcomeBody": "Explore bairros, salve lugares e veja insights de pontua??o por perto.",
+  "notificationsGenericUpdate": "Voc? tem uma nova atualiza??o",
+  "accountDelete": "Excluir conta",
+  "accountDeleteQuestion": "Excluir conta?",
+  "accountDeleteWarning": "Isso exclui permanentemente sua conta Terrava e os dados salvos.",
+  "authWelcomeBack": "Bem-vindo de volta",
+  "authSignInSubtitle": "Entre para salvar bairros e continuar explorando.",
+  "authEmail": "E-mail",
+  "authPassword": "Senha",
+  "authForgotPassword": "Esqueceu a senha?",
+  "authSignIn": "Entrar",
+  "authSignOut": "Sair",
+  "authContinueGoogle": "Continuar com o Google",
+  "authContinueApple": "Continuar com a Apple",
+  "authCreateAccount": "Criar uma conta",
+  "authCreateAccountTitle": "Criar conta",
+  "authSignUpSubtitle": "Junte-se ao Terrava para salvar lugares e planejar seu próximo bairro.",
+  "authDisplayName": "Nome de exibição",
+  "authSignUp": "Cadastrar",
+  "authAccountCreated": "Conta criada. Você já pode começar a explorar.",
+  "authAlreadyHaveAccount": "Já tem uma conta? Entrar",
+  "authResetPasswordTitle": "Redefinir senha",
+  "authResetPasswordSubtitle": "Digite seu e-mail e enviaremos um link de redefinição.",
+  "authSendResetLink": "Enviar link de redefinição",
+  "authBackToSignIn": "Voltar ao login",
+  "validationInvalidEmail": "Digite um e-mail válido",
+  "validationPasswordMinLength": "Mínimo de 6 caracteres",
+  "onboardingDiscoverTitle": "Descubra qualquer lugar",
+  "onboardingDiscoverBody": "Pesquise cidades, ruas, pontos de referência ou coordenadas e veja como é a vida ao redor.",
+  "onboardingNearbyTitle": "Saiba o que há por perto",
+  "onboardingNearbyBody": "Restaurantes, hospitais, escolas, bancos, mercados e o essencial — organizados para decisões reais.",
+  "onboardingPlanTitle": "Planeje com clareza",
+  "onboardingPlanBody": "Salve bairros, compare áreas e avance com confiança — antes de visitar ou se mudar.",
+  "onboardingSkip": "Pular",
+  "onboardingGetStarted": "Começar",
+  "homeTagline": "Descubra o que há ao redor de qualquer bairro",
+  "homeSearchHint": "Pesquisar cidade, área, ponto de referência…",
+  "homeCategoriesTitle": "Categorias",
+  "homeCategoriesSubtitle": "Essenciais ao seu redor",
+  "homeNearbyTitle": "Por perto",
+  "homeNearbySubtitle": "Perto de você",
+  "homeNoNearbyTitle": "Ainda não há lugares próximos",
+  "homeNoNearbyMessage": "Permita a localização ou tente Pesquisar.",
+  "homeRecentlyViewedTitle": "Vistos recentemente",
+  "homeRecentlyViewedSubtitle": "Da atividade da sua conta",
+  "homeNoRecentViews": "Os lugares que você abrir aparecerão aqui.",
+  "homePopularNearbyTitle": "Populares por perto",
+  "homePopularNearbySubtitle": "Bem avaliados ao seu redor",
+  "locationPermissionNeeded": "Permissão de localização necessária para lugares próximos",
+  "locationUsingCurrent": "Usando sua localização atual",
+  "locationReadError": "Não foi possível ler a localização",
+  "locationNeighborhood": "Bairro",
+  "locationSaveArea": "Salvar área",
+  "locationAreaSaved": "Área salva",
+  "locationNoRadiusResults": "Nenhum resultado neste raio",
+  "locationInsightsUnavailable": "Insights indisponíveis: {error}",
+  "@locationInsightsUnavailable": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "amenityScore": "Pontuação de comodidades {score}/100",
+  "@amenityScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherSummary": "{temp}°C · {condition} · sensação {feelsLike}°C · umidade {humidity}%",
+  "@weatherSummary": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      },
+      "condition": {
+        "type": "String"
+      },
+      "feelsLike": {
+        "type": "int"
+      },
+      "humidity": {
+        "type": "int"
+      }
+    }
+  },
+  "fxRate": "Câmbio: 1 {base} = {rate} {target}",
+  "@fxRate": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreSummary": "{area} marca {overall}/100 em conveniência do dia a dia (acesso a comodidades — não crime nem habitabilidade oficial). Mais forte: {strongest}. Mais fraco: {weakest}. Em {radius} km: {essentials} opções de mercado/farmácia, {health} locais de saúde, {food} locais de comida, {transport} locais de transporte.",
+  "@scoreSummary": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      },
+      "overall": {
+        "type": "int"
+      },
+      "strongest": {
+        "type": "String"
+      },
+      "weakest": {
+        "type": "String"
+      },
+      "radius": {
+        "type": "String"
+      },
+      "essentials": {
+        "type": "int"
+      },
+      "health": {
+        "type": "int"
+      },
+      "food": {
+        "type": "int"
+      },
+      "transport": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreEssentials": "Essenciais",
+  "scoreHealth": "Saúde",
+  "scoreFood": "Comida",
+  "scoreTransport": "Transporte",
+  "scoreMoney": "Bancos e caixas",
+  "scoreEducation": "Educação",
+  "scoreFuel": "Combustível",
+  "categoryRestaurants": "Restaurantes",
+  "categoryHotels": "Hotéis",
+  "categoryHospitals": "Hospitais",
+  "categoryBanks": "Bancos",
+  "categoryPharmacies": "Farmácias",
+  "categorySchools": "Escolas",
+  "categorySupermarkets": "Supermercados",
+  "categoryMarkets": "Mercados",
+  "categoryFuel": "Combustível",
+  "categoryNoResultsTitle": "Sem resultados",
+  "categoryNoResultsMessage": "Tente outra categoria ou mova o mapa.",
+  "mapClusterPlaces": "{count} lugares",
+  "@mapClusterPlaces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTapToZoom": "Toque para ampliar",
+  "mapSearchArea": "Pesquisar nesta área",
+  "mapMyLocation": "Minha localização",
+  "savedTitle": "Salvos",
+  "savedSubtitle": "Lugares, bairros e coleções sincronizados com sua conta.",
+  "savedCollectionsTitle": "Coleções",
+  "savedNewCollection": "Nova",
+  "savedNoCollections": "Ainda não há coleções.",
+  "savedNeighborhoodsTitle": "Bairros",
+  "savedNoAreas": "Ainda não há áreas salvas.",
+  "savedPlacesTitle": "Lugares",
+  "savedNoPlacesTitle": "Nenhum lugar salvo",
+  "savedNoPlacesMessage": "Salve restaurantes, hotéis e mais nos detalhes.",
+  "collectionFallbackName": "Coleção",
+  "collectionNewTitle": "Nova coleção",
+  "collectionNameHint": "Nome",
+  "collectionDeleteTooltip": "Excluir coleção",
+  "collectionEmptyTitle": "Coleção vazia",
+  "collectionEmptyMessage": "Adicione lugares em Detalhes do lugar → Salvar na coleção.",
+  "collectionSavedArea": "Área salva",
+  "collectionCreateFirst": "Crie primeiro uma coleção em Salvos",
+  "collectionAdded": "Adicionado à coleção",
+  "areaFallbackName": "Área",
+  "placeFallbackName": "Lugar",
+  "placeOpenNow": "Aberto agora",
+  "placeClosed": "Fechado",
+  "placeSaved": "Lugar salvo",
+  "placeCollection": "Coleção",
+  "placeCall": "Ligar",
+  "placeWebsite": "Site",
+  "placeHours": "Horário",
+  "placeReviews": "Avaliações",
+  "profileTitle": "Perfil",
+  "profileFallbackName": "Viajante",
+  "profileChangePhoto": "Alterar foto",
+  "profileSettingsSubtitle": "Unidades, idioma, notificações, jurídico",
+  "profilePhotoUpdated": "Foto de perfil atualizada",
+  "searchTitle": "Pesquisar",
+  "searchHint": "País, cidade, rua, ponto de referência, lat,lng",
+  "searchNoResults": "Nenhum resultado para essa pesquisa",
+  "searchVoiceTooltip": "Pesquisa por voz",
+  "searchVoiceDisabledTooltip": "Pesquisa por voz (ativar em .env)",
+  "searchVoiceUnavailable": "Microfone / fala indisponível",
+  "searchVoiceEnableInstruction": "Defina ENABLE_VOICE_SEARCH=true em .env para ativar",
+  "searchRecentTitle": "Pesquisas recentes",
+  "searchNoRecent": "Ainda não há pesquisas recentes.",
+  "searchPopularTitle": "Pesquisas populares",
+  "searchNoPopular": "As pesquisas populares aparecerão com o uso real.",
+  "searchNoSuggestionsTitle": "Sem sugestões",
+  "searchNoSuggestionsMessage": "Tente uma cidade, ponto de referência ou coordenadas.",
+  "directionsLocationRequired": "Localização atual necessária para direções",
+  "directionsNoRoute": "Nenhuma rota encontrada",
+  "directionsOriginYou": "Você",
+  "directionsDestination": "Destino",
+  "aboutTitle": "Sobre",
+  "aboutDefaultDescription": "O Terrava ajuda qualquer pessoa a entender qualquer bairro antes de visitar, mudar ou viver lá.",
+  "aboutVersion": "Versão {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "Ajuda",
+  "helpHowItWorksTitle": "Como o Terrava funciona",
+  "helpHowItWorksBody": "Pesquise qualquer lugar na Terra, explore o essencial por perto no mapa, abra os detalhes do bairro para pontuações de comodidades e salve lugares na sua conta.",
+  "helpScoresTitle": "Pontuações do bairro",
+  "helpScoresBody": "As pontuações são estimativas de conveniência/comodidades com base na densidade do Google Places, avaliações e distância. Não são indicadores de crime, qualidade escolar ou habitabilidade oficial.",
+  "privacyBody": "O Terrava armazena seu perfil de conta, locais salvos, histórico de pesquisa e tokens push opcionais no Supabase com segurança em nível de linha. A localização é usada no dispositivo para buscar locais próximos nas APIs do Google. Não vendemos dados pessoais. Entre em contato com o suporte para solicitações de exclusão.",
+  "termsBody": "O Terrava oferece ferramentas de descoberta de bairros para fins informativos. As pontuações de comodidades são estimativas, não garantias de segurança ou habitabilidade. Dados de mapas e lugares de terceiros podem estar incompletos ou desatualizados. Use o app de acordo com as leis aplicáveis e os termos do Google Maps / Places.",
+  "errorGenericTitle": "Algo deu errado"
+}

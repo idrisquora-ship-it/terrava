@@ -1,0 +1,287 @@
+{
+  "@@locale": "tr",
+  "appName": "Terrava",
+  "splashTagline": "Her mahalleyi anlayın",
+  "navHome": "Ana Sayfa",
+  "navExplore": "Keşfet",
+  "navSaved": "Kaydedilenler",
+  "navProfile": "Profil",
+  "commonCancel": "İptal",
+  "commonCreate": "Oluştur",
+  "commonDelete": "Sil",
+  "commonContinue": "Devam",
+  "commonTryAgain": "Tekrar dene",
+  "commonDirections": "Yol tarifi",
+  "commonSave": "Kaydet",
+  "commonShare": "Paylaş",
+  "commonSeeAll": "Tümünü gör",
+  "themeSystem": "Sistem",
+  "themeLight": "Açık",
+  "themeDark": "Koyu",
+  "unitsMetric": "Metrik (km)",
+  "unitsImperial": "İmparatorluk (mi)",
+  "settingsTitle": "Ayarlar",
+  "settingsAppearance": "Görünüm",
+  "settingsUnits": "Birimler",
+  "settingsLanguage": "Dil",
+  "settingsCurrency": "Para birimi",
+  "settingsAboutTerrava": "Terrava hakkında",
+  "settingsHelp": "Yardım",
+  "settingsPrivacyPolicy": "Gizlilik Politikası",
+  "settingsTermsOfService": "Hizmet Şartları",
+  "notificationsPushTitle": "Anlık bildirimler",
+  "notificationsPushSubtitle": "Kaydedilen yerler, ipuçları ve hesap uyarıları Firebase ile",
+  "notificationsEnabledTitle": "Bildirimler a??k",
+  "notificationsEnabledBody": "Terrava, kaydedilen yerler ve hesap g?ncellemeleri hakk?nda sizi uyarabilir.",
+  "notificationsPlaceSavedTitle": "Terrava'ya kaydedildi",
+  "notificationsPlaceSavedBody": "{placeName} listenizde. Yeniden bakmak i?in istedi?iniz zaman Kaydedilenler'i a??n.",
+  "@notificationsPlaceSavedBody": {
+    "placeholders": {
+      "placeName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsAreaSavedTitle": "Mahalle kaydedildi",
+  "notificationsAreaSavedBody": "{areaName}, puanlar? tekrar kar??la?t?rmak istedi?inizde haz?r.",
+  "@notificationsAreaSavedBody": {
+    "placeholders": {
+      "areaName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsWelcomeTitle": "Terrava'ya ho? geldiniz",
+  "notificationsWelcomeBody": "Mahalleleri ke?fedin, yerleri kaydedin ve yak?ndaki puan ?ng?r?lerini al?n.",
+  "notificationsGenericUpdate": "Yeni bir g?ncellemeniz var",
+  "accountDelete": "Hesabı sil",
+  "accountDeleteQuestion": "Hesap silinsin mi?",
+  "accountDeleteWarning": "Bu, Terrava hesabınızı ve kaydedilen verileri kalıcı olarak siler.",
+  "authWelcomeBack": "Tekrar hoş geldiniz",
+  "authSignInSubtitle": "Mahalleleri kaydetmek ve keşfe devam etmek için giriş yapın.",
+  "authEmail": "E-posta",
+  "authPassword": "Şifre",
+  "authForgotPassword": "Şifrenizi mi unuttunuz?",
+  "authSignIn": "Giriş yap",
+  "authSignOut": "Çıkış yap",
+  "authContinueGoogle": "Google ile devam et",
+  "authContinueApple": "Apple ile devam et",
+  "authCreateAccount": "Hesap oluştur",
+  "authCreateAccountTitle": "Hesap oluştur",
+  "authSignUpSubtitle": "Yerleri kaydetmek ve bir sonraki mahallenizi planlamak için Terrava'ya katılın.",
+  "authDisplayName": "Görünen ad",
+  "authSignUp": "Kaydol",
+  "authAccountCreated": "Hesap oluşturuldu. Keşfetmeye başlayabilirsiniz.",
+  "authAlreadyHaveAccount": "Zaten hesabınız var mı? Giriş yapın",
+  "authResetPasswordTitle": "Şifreyi sıfırla",
+  "authResetPasswordSubtitle": "E-postanızı girin, size sıfırlama bağlantısı gönderelim.",
+  "authSendResetLink": "Sıfırlama bağlantısı gönder",
+  "authBackToSignIn": "Girişe dön",
+  "validationInvalidEmail": "Geçerli bir e-posta girin",
+  "validationPasswordMinLength": "En az 6 karakter",
+  "onboardingDiscoverTitle": "Her yeri keşfedin",
+  "onboardingDiscoverBody": "Şehirleri, sokakları, simge yapıları veya koordinatları arayın ve çevredeki hayatı görün.",
+  "onboardingNearbyTitle": "Yakında ne olduğunu bilin",
+  "onboardingNearbyBody": "Restoranlar, hastaneler, okullar, bankalar, pazarlar ve ihtiyaçlar — gerçek kararlar için düzenlenmiş.",
+  "onboardingPlanTitle": "Netlikle planlayın",
+  "onboardingPlanBody": "Mahalleleri kaydedin, bölgeleri karşılaştırın ve güvenle ilerleyin — ziyaret veya taşınmadan önce.",
+  "onboardingSkip": "Atla",
+  "onboardingGetStarted": "Başla",
+  "homeTagline": "Her mahallenin çevresinde ne olduğunu keşfedin",
+  "homeSearchHint": "Şehir, bölge, simge yapı ara…",
+  "homeCategoriesTitle": "Kategoriler",
+  "homeCategoriesSubtitle": "Çevrenizdeki ihtiyaçlar",
+  "homeNearbyTitle": "Yakında",
+  "homeNearbySubtitle": "Size yakın",
+  "homeNoNearbyTitle": "Henüz yakında yer yok",
+  "homeNoNearbyMessage": "Konuma izin verin veya Aramayı deneyin.",
+  "homeRecentlyViewedTitle": "Son görüntülenenler",
+  "homeRecentlyViewedSubtitle": "Hesap etkinliğinizden",
+  "homeNoRecentViews": "Açtığınız yerler burada görünür.",
+  "homePopularNearbyTitle": "Yakında popüler",
+  "homePopularNearbySubtitle": "Çevrenizde yüksek puanlı",
+  "locationPermissionNeeded": "Yakındaki yerler için konum izni gerekli",
+  "locationUsingCurrent": "Mevcut konumunuz kullanılıyor",
+  "locationReadError": "Konum okunamadı",
+  "locationNeighborhood": "Mahalle",
+  "locationSaveArea": "Bölgeyi kaydet",
+  "locationAreaSaved": "Bölge kaydedildi",
+  "locationNoRadiusResults": "Bu yarıçapta sonuç yok",
+  "locationInsightsUnavailable": "İçgörüler kullanılamıyor: {error}",
+  "@locationInsightsUnavailable": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "amenityScore": "Olanak skoru {score}/100",
+  "@amenityScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "weatherSummary": "{temp}°C · {condition} · hissedilen {feelsLike}°C · nem {humidity}%",
+  "@weatherSummary": {
+    "placeholders": {
+      "temp": {
+        "type": "int"
+      },
+      "condition": {
+        "type": "String"
+      },
+      "feelsLike": {
+        "type": "int"
+      },
+      "humidity": {
+        "type": "int"
+      }
+    }
+  },
+  "fxRate": "Kur: 1 {base} = {rate} {target}",
+  "@fxRate": {
+    "placeholders": {
+      "base": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "scoreSummary": "{area} günlük kolaylık için {overall}/100 puan alıyor (olanak erişimi — suç veya resmi yaşanabilirlik değil). En güçlü: {strongest}. En zayıf: {weakest}. {radius} km içinde: {essentials} market/eczane seçeneği, {health} sağlıkla ilgili yer, {food} yemek yeri, {transport} ulaşımla ilgili yer.",
+  "@scoreSummary": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      },
+      "overall": {
+        "type": "int"
+      },
+      "strongest": {
+        "type": "String"
+      },
+      "weakest": {
+        "type": "String"
+      },
+      "radius": {
+        "type": "String"
+      },
+      "essentials": {
+        "type": "int"
+      },
+      "health": {
+        "type": "int"
+      },
+      "food": {
+        "type": "int"
+      },
+      "transport": {
+        "type": "int"
+      }
+    }
+  },
+  "scoreEssentials": "İhtiyaçlar",
+  "scoreHealth": "Sağlık",
+  "scoreFood": "Yemek",
+  "scoreTransport": "Ulaşım",
+  "scoreMoney": "Bankalar ve ATM'ler",
+  "scoreEducation": "Eğitim",
+  "scoreFuel": "Yakıt",
+  "categoryRestaurants": "Restoranlar",
+  "categoryHotels": "Oteller",
+  "categoryHospitals": "Hastaneler",
+  "categoryBanks": "Bankalar",
+  "categoryPharmacies": "Eczaneler",
+  "categorySchools": "Okullar",
+  "categorySupermarkets": "Süpermarketler",
+  "categoryMarkets": "Pazarlar",
+  "categoryFuel": "Yakıt",
+  "categoryNoResultsTitle": "Sonuç yok",
+  "categoryNoResultsMessage": "Başka bir kategori deneyin veya haritayı kaydırın.",
+  "mapClusterPlaces": "{count} yer",
+  "@mapClusterPlaces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mapTapToZoom": "Yakınlaştırmak için dokunun",
+  "mapSearchArea": "Bu alanı ara",
+  "mapMyLocation": "Konumum",
+  "savedTitle": "Kaydedilenler",
+  "savedSubtitle": "Yerler, mahalleler ve koleksiyonlar hesabınıza senkronize edilir.",
+  "savedCollectionsTitle": "Koleksiyonlar",
+  "savedNewCollection": "Yeni",
+  "savedNoCollections": "Henüz koleksiyon yok.",
+  "savedNeighborhoodsTitle": "Mahalleler",
+  "savedNoAreas": "Henüz kaydedilmiş bölge yok.",
+  "savedPlacesTitle": "Yerler",
+  "savedNoPlacesTitle": "Kaydedilmiş yer yok",
+  "savedNoPlacesMessage": "Ayrıntılardan restoran, otel ve daha fazlasını kaydedin.",
+  "collectionFallbackName": "Koleksiyon",
+  "collectionNewTitle": "Yeni koleksiyon",
+  "collectionNameHint": "Ad",
+  "collectionDeleteTooltip": "Koleksiyonu sil",
+  "collectionEmptyTitle": "Boş koleksiyon",
+  "collectionEmptyMessage": "Yer Ayrıntıları → Koleksiyona kaydet ile yer ekleyin.",
+  "collectionSavedArea": "Kaydedilen bölge",
+  "collectionCreateFirst": "Önce Kaydedilenler'de bir koleksiyon oluşturun",
+  "collectionAdded": "Koleksiyona eklendi",
+  "areaFallbackName": "Bölge",
+  "placeFallbackName": "Yer",
+  "placeOpenNow": "Şu an açık",
+  "placeClosed": "Kapalı",
+  "placeSaved": "Yer kaydedildi",
+  "placeCollection": "Koleksiyon",
+  "placeCall": "Ara",
+  "placeWebsite": "Web sitesi",
+  "placeHours": "Saatler",
+  "placeReviews": "Yorumlar",
+  "profileTitle": "Profil",
+  "profileFallbackName": "Gezgin",
+  "profileChangePhoto": "Fotoğrafı değiştir",
+  "profileSettingsSubtitle": "Birimler, dil, bildirimler, yasal",
+  "profilePhotoUpdated": "Profil fotoğrafı güncellendi",
+  "searchTitle": "Ara",
+  "searchHint": "Ülke, şehir, sokak, simge yapı, enlem,boylam",
+  "searchNoResults": "Bu arama için sonuç yok",
+  "searchVoiceTooltip": "Sesli arama",
+  "searchVoiceDisabledTooltip": "Sesli arama (.env'de etkinleştirin)",
+  "searchVoiceUnavailable": "Mikrofon / konuşma kullanılamıyor",
+  "searchVoiceEnableInstruction": "Etkinleştirmek için .env'de ENABLE_VOICE_SEARCH=true ayarlayın",
+  "searchRecentTitle": "Son aramalar",
+  "searchNoRecent": "Henüz son arama yok.",
+  "searchPopularTitle": "Popüler aramalar",
+  "searchNoPopular": "Popüler aramalar gerçek kullanımdan görünecek.",
+  "searchNoSuggestionsTitle": "Öneri yok",
+  "searchNoSuggestionsMessage": "Bir şehir, simge yapı veya koordinat deneyin.",
+  "directionsLocationRequired": "Yol tarifi için mevcut konum gerekli",
+  "directionsNoRoute": "Rota bulunamadı",
+  "directionsOriginYou": "Siz",
+  "directionsDestination": "Varış noktası",
+  "aboutTitle": "Hakkında",
+  "aboutDefaultDescription": "Terrava, herkesin herhangi bir mahalleyi ziyaret etmeden, taşınmadan veya yaşamadan önce anlamasına yardımcı olur.",
+  "aboutVersion": "Sürüm {version}",
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpTitle": "Yardım",
+  "helpHowItWorksTitle": "Terrava nasıl çalışır",
+  "helpHowItWorksBody": "Dünyadaki herhangi bir yeri arayın, haritada yakındaki ihtiyaçları keşfedin, olanak skorları için mahalle ayrıntılarını açın ve yerleri hesabınıza kaydedin.",
+  "helpScoresTitle": "Mahalle skorları",
+  "helpScoresBody": "Skorlar, Google Places yoğunluğu, puanlar ve mesafeden kolaylık/olanak tahminleridir. Suç, okul kalitesi veya resmi yaşanabilirlik puanı değildir.",
+  "privacyBody": "Terrava, hesap profilinizi, kaydedilen yerleri, arama geçmişini ve isteğe bağlı push belirteçlerini satır düzeyinde güvenlikle Supabase'te saklar. Konum, yakındaki yerleri Google API'lerinden almak için cihazda kullanılır. Kişisel verileri satmayız. Silme talepleri için destek ile iletişime geçin.",
+  "termsBody": "Terrava, bilgilendirme amacıyla mahalle keşif araçları sunar. Olanak skorları tahminidir; güvenlik veya yaşanabilirlik garantisi değildir. Üçüncü taraf harita ve yer verileri eksik veya güncel olmayabilir. Uygulamayı yürürlükteki yasalar ve Google Maps / Places şartlarına uygun kullanın.",
+  "errorGenericTitle": "Bir şeyler ters gitti"
+}

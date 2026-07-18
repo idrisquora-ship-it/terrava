@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Terrava - explore neighborhoods, scores, and places.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1B3A2F">
+
+  <!-- Google Sign-In (Web client ID from .env) -->
+  <meta name="google-signin-client_id" content="758604892295-vk32igfg550bm1ger74s3tkmc4hl991r.apps.googleusercontent.com">
+
+  <!-- iOS / PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Terrava">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>Terrava</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Google Maps JavaScript API (required by google_maps_flutter_web) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKp4mi8fv_2uT9ioW85Qk0xcf6ovvklmA"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: #0C1411;
+      overflow: hidden;
+    }
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #B7D0C2;
+      font-family: system-ui, sans-serif;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading Terrava...</div>
+  <script src="flutter_bootstrap.js" async></script>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var el = document.getElementById('loading');
+      if (el) el.remove();
+    });
+  </script>
+</body>
+</html>
