@@ -31,7 +31,8 @@ final dioProvider = Provider<Dio>((ref) {
         // Direct Foursquare host only. Same-origin `/api/fsq/*` proxy adds auth
         // server-side so the browser key is not required for web requests.
         final isDirectFoursquare = host.contains('foursquare.com');
-        final isLocalFsqProxy = path.startsWith('/api/fsq/');
+        final isLocalFsqProxy =
+            path == '/api/fsq' || path.startsWith('/api/fsq/');
         if (isDirectFoursquare) {
           final key = Env.foursquareApiKey;
           options.headers['Authorization'] =

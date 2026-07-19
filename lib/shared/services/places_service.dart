@@ -36,27 +36,37 @@ class PlacesService {
   static const _mapbox = 'https://api.mapbox.com';
 
   /// On deployed web, call the same-origin Vercel proxy (avoids Foursquare CORS).
+  /// Proxy is a single function: `/api/fsq?path=places/search&...`
   /// On Android / local web, call Foursquare directly (with proxy fallback).
   String get _fsqPlacesBase {
-    final override = Env.foursquareProxyBase;
-    if (override.isNotEmpty) return override;
+    final override = Env.foursquareProxyBase.trim();
+    if (override.isNotEmpty) return _normalizeProxyBase(override);
     if (kIsWeb && !_isLocalWebHost) {
-      return '${Uri.base.origin}/api/fsq/places';
+      return '${Uri.base.origin}/api/fsq';
     }
     return 'https://places-api.foursquare.com/places';
   }
 
   String? get _fsqFallbackBase {
-    final configured = Env.foursquareProxyBase;
+    final configured = Env.foursquareProxyBase.trim();
     if (configured.isNotEmpty) return null;
     final web = Env.appWebUrl;
     if (web.isNotEmpty) {
       final origin = web.replaceAll(RegExp(r'/+$'), '');
-      return '$origin/api/fsq/places';
+      return '$origin/api/fsq';
     }
     if (kIsWeb && !_isLocalWebHost) return null;
     // Last-resort public deploy proxy when direct Foursquare is blocked.
-    return 'https://terrava-nine.vercel.app/api/fsq/places';
+    return 'https://terrava-nine.vercel.app/api/fsq';
+  }
+
+  /// Accept both `/api/fsq` and legacy `/api/fsq/places` env values.
+  String _normalizeProxyBase(String base) {
+    var normalized = base.replaceAll(RegExp(r'/+$'), '');
+    if (normalized.endsWith('/api/fsq/places')) {
+      normalized = normalized.substring(0, normalized.length - '/places'.length);
+    }
+    return normalized;
   }
 
   bool get _isLocalWebHost {
@@ -73,6 +83,16 @@ class PlacesService {
     Map<String, dynamic>? queryParameters,
   }) async {
     Future<Response<Map<String, dynamic>>> once(String base) {
+      if (_isProxyBase(base)) {
+        final relative = path.startsWith('/') ? path.substring(1) : path;
+        return _dio.get<Map<String, dynamic>>(
+          base,
+          queryParameters: {
+            'path': 'places/$relative',
+            ...?queryParameters,
+          },
+        );
+      }
       return _dio.get<Map<String, dynamic>>(
         '$base$path',
         queryParameters: queryParameters,
@@ -83,12 +103,13 @@ class PlacesService {
       return await once(_fsqPlacesBase);
     } on DioException catch (e) {
       final fallback = _fsqFallbackBase;
-      final connectionIssue = e.type == DioExceptionType.connectionError ||
+      final retryable = e.type == DioExceptionType.connectionError ||
           e.type == DioExceptionType.unknown ||
-          e.type == DioExceptionType.connectionTimeout;
+          e.type == DioExceptionType.connectionTimeout ||
+          e.response?.statusCode == 404;
       if (fallback == null ||
           fallback == _fsqPlacesBase ||
-          !connectionIssue) {
+          !retryable) {
         rethrow;
       }
       return once(fallback);

@@ -1,11 +1,13 @@
 /**
  * Same-origin proxy for Foursquare Places API.
  *
- * Browser clients cannot call places-api.foursquare.com directly: the
- * preflight OPTIONS request returns 400, which surfaces in Flutter web as
- * DioException [connection error] / XMLHttpRequest onError.
+ * Browser clients cannot call places-api.foursquare.com directly (CORS).
+ * Vercel catch-all routes under /api/fsq/[...path] only match a single
+ * extra segment in this static+api setup, so we use a single function:
  *
- * Set FOURSQUARE_API_KEY in the Vercel project environment (same value as .env).
+ *   GET /api/fsq?path=places/search&ll=...&radius=...
+ *
+ * Set FOURSQUARE_API_KEY in the Vercel project environment.
  */
 
 function cors(res) {
@@ -39,10 +41,23 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const parts = req.query.path;
-  const path = Array.isArray(parts) ? parts.join('/') : `${parts || ''}`;
+  let path = '';
+  if (typeof req.query.path === 'string') {
+    path = req.query.path;
+  } else if (Array.isArray(req.query.path)) {
+    path = req.query.path.join('/');
+  }
+  path = path.replace(/^\/+/, '');
+
+  // Accept legacy mistaken bases that omit "places/" (we always talk to /places/*).
+  if (path && !path.startsWith('places/') && path !== 'places') {
+    path = `places/${path}`;
+  }
   if (!path) {
-    res.status(400).json({ error: 'Missing path' });
+    res.status(400).json({
+      error: 'Missing path query param',
+      example: '/api/fsq?path=places/search&ll=6.52,3.38&limit=5',
+    });
     return;
   }
 

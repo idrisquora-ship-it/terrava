@@ -54,7 +54,13 @@ Browsers cannot call Foursquare directly (CORS preflight fails → DioException 
 2. Redeploy after adding the variable.
 3. Optional client overrides in `.env`:
    - `APP_WEB_URL=https://your-app.vercel.app` (Android fallback proxy)
-   - `FOURSQUARE_PROXY_BASE=https://your-app.vercel.app/api/fsq/places`
+   - `FOURSQUARE_PROXY_BASE=https://your-app.vercel.app/api/fsq`
+
+Proxy URL shape (single Vercel function — multi-segment `/api/fsq/places/search` returns 404):
+
+```
+GET /api/fsq?path=places/search&ll=6.52,3.38&radius=4000&limit=20
+```
 
 Free allowance is limited (hundreds of Pro calls/month); enough to develop. Enable billing in the Foursquare console if you need more.
 
