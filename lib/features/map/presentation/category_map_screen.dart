@@ -17,6 +17,7 @@ import '../../../shared/widgets/terrava_app_bar.dart';
 import '../../../shared/widgets/terrava_button.dart';
 import '../../../shared/widgets/terrava_map.dart';
 import '../../favorites/controllers/favorites_controller.dart';
+import '../../listings/repositories/listings_repository.dart';
 
 class CategoryMapScreen extends ConsumerStatefulWidget {
   const CategoryMapScreen({
@@ -103,9 +104,21 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
             type: widget.type,
             radiusMeters: 4000,
           );
+      final listings = await ref.read(listingsRepositoryProvider).nearby(
+            lat: target.latitude,
+            lng: target.longitude,
+            radiusKm: 8,
+            category: widget.type,
+          );
       if (!mounted) return;
       _places = places.where((p) => p.lat != null && p.lng != null).toList();
       _markers = [
+        for (final l in listings)
+          terravaPlaceMarker(
+            point: LatLng(l.lat, l.lng),
+            label: '★ ${l.title}',
+            onTap: () => context.push(AppRoutes.listingPath(l.id)),
+          ),
         for (final p in _places)
           terravaPlaceMarker(
             point: LatLng(p.lat!, p.lng!),

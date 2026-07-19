@@ -71,17 +71,25 @@ class AuthRepository {
     required String email,
     required String password,
     String? displayName,
+    String role = 'civilian',
   }) async {
     try {
+      final normalizedRole =
+          role == 'business_owner' ? 'business_owner' : 'civilian';
       final response = await _requireClient.auth.signUp(
         email: email.trim(),
         password: password,
         data: {
           if (displayName != null && displayName.trim().isNotEmpty)
             'full_name': displayName.trim(),
+          'role': normalizedRole,
         },
       );
-      await _syncProfileFromAuthUser(response.user);
+      await _syncProfileFromAuthUser(
+        response.user,
+        role: normalizedRole,
+        roleChosen: true,
+      );
       return response;
     } on AuthException catch (e) {
       throw AuthFailure(e.message);
@@ -199,6 +207,8 @@ class AuthRepository {
     String? locale,
     String? fcmToken,
     String? avatarUrl,
+    String? role,
+    bool? roleChosen,
   }) async {
     final user = currentUser;
     if (user == null) return;
@@ -209,9 +219,18 @@ class AuthRepository {
       if (locale != null) 'locale': locale,
       if (fcmToken != null) 'fcm_token': fcmToken,
       if (avatarUrl != null) 'avatar_url': avatarUrl,
+      if (role != null) 'role': role,
+      if (roleChosen != null) 'role_chosen': roleChosen,
       'updated_at': DateTime.now().toIso8601String(),
     };
     await _requireClient.from('profiles').update(payload).eq('id', user.id);
+  }
+
+  /// One-time role selection for Google / social sign-in users.
+  Future<void> chooseRole(String role) async {
+    final normalized =
+        role == 'business_owner' ? 'business_owner' : 'civilian';
+    await updateProfile(role: normalized, roleChosen: true);
   }
 
   Future<void> clearFcmToken() async {
@@ -288,7 +307,11 @@ class AuthRepository {
   }
 
   /// Ensures a profiles row exists and picks up Google name/photo when missing.
-  Future<void> _syncProfileFromAuthUser(User? user) async {
+  Future<void> _syncProfileFromAuthUser(
+    User? user, {
+    String? role,
+    bool? roleChosen,
+  }) async {
     if (user == null) return;
     try {
       final meta = user.userMetadata ?? const <String, dynamic>{};
@@ -299,12 +322,18 @@ class AuthRepository {
           ?.toString();
       final avatarUrl =
           (meta['avatar_url'] ?? meta['picture'] ?? meta['avatar'])?.toString();
+      final metaRole = meta['role']?.toString();
 
       await _requireClient.from('profiles').upsert({
         'id': user.id,
         if (displayName != null && displayName.isNotEmpty)
           'display_name': displayName,
         if (avatarUrl != null && avatarUrl.isNotEmpty) 'avatar_url': avatarUrl,
+        if (role != null) 'role': role,
+        if (role == null &&
+            (metaRole == 'civilian' || metaRole == 'business_owner'))
+          'role': metaRole,
+        if (roleChosen != null) 'role_chosen': roleChosen,
         'updated_at': DateTime.now().toIso8601String(),
       });
     } catch (_) {

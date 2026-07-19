@@ -28,6 +28,13 @@ class PlaceCategory {
 
 const kPlaceCategories = <PlaceCategory>[
   PlaceCategory(
+    id: 'house_rent',
+    label: 'House rent',
+    typeKey: 'house_rent',
+    fsqCategoryIds: [],
+    iconName: 'home_work',
+  ),
+  PlaceCategory(
     id: 'restaurants',
     label: 'Restaurants',
     typeKey: 'restaurant',

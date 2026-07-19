@@ -309,7 +309,12 @@ class PlacesService {
     return _featureCenter(features.first as Map<String, dynamic>);
   }
 
-  Future<({String? formattedAddress})?> reverseGeocode({
+  Future<({
+    String? formattedAddress,
+    String? city,
+    String? state,
+    String? neighborhood,
+  })?> reverseGeocode({
     required double lat,
     required double lng,
   }) async {
@@ -321,12 +326,70 @@ class PlacesService {
       queryParameters: {
         'limit': 1,
         'language': language,
+        'types': 'neighborhood,locality,place,district,region',
       },
     );
     final features = response.data?['features'] as List<dynamic>? ?? [];
     if (features.isEmpty) return null;
     final first = features.first as Map<String, dynamic>;
-    return (formattedAddress: first['place_name'] as String?);
+    final context = first['context'] as List<dynamic>? ?? [];
+
+    String? pickContext(String prefix) {
+      for (final raw in context) {
+        final item = raw as Map<String, dynamic>;
+        final id = item['id'] as String? ?? '';
+        if (id.startsWith(prefix)) return item['text'] as String?;
+      }
+      return null;
+    }
+
+    final placeTypes =
+        (first['place_type'] as List<dynamic>? ?? []).map((e) => '$e').toList();
+    final featureText = first['text'] as String?;
+
+    String? city = pickContext('place.');
+    String? neighborhood = pickContext('neighborhood.') ??
+        pickContext('locality.') ??
+        pickContext('district.');
+    String? state = pickContext('region.');
+
+    if (city == null && placeTypes.contains('place')) {
+      city = featureText;
+    }
+    if (neighborhood == null &&
+        (placeTypes.contains('neighborhood') ||
+            placeTypes.contains('locality'))) {
+      neighborhood = featureText;
+    }
+    if (state == null && placeTypes.contains('region')) {
+      state = featureText;
+    }
+
+    // Fallbacks from "Ayekale, Osogbo, Osun, Nigeria"
+    final formatted = first['place_name'] as String?;
+    if ((city == null || state == null) && formatted != null) {
+      final parts = formatted
+          .split(',')
+          .map((p) => p.trim())
+          .where((p) => p.isNotEmpty)
+          .toList();
+      if (parts.length >= 2) {
+        city ??= parts.length >= 3 ? parts[parts.length - 3] : parts.first;
+        if (parts.length >= 2) {
+          final maybeState = parts[parts.length - 2];
+          if (maybeState.toLowerCase() != 'nigeria') {
+            state ??= maybeState;
+          }
+        }
+      }
+    }
+
+    return (
+      formattedAddress: formatted,
+      city: city,
+      state: state,
+      neighborhood: neighborhood,
+    );
   }
 
   Future<RouteDirections> directions({

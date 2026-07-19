@@ -45,6 +45,7 @@ final popularPlacesProvider =
 
 IconData _categoryIcon(String name) {
   return switch (name) {
+    'home_work' => Icons.home_work_rounded,
     'restaurant' => Icons.restaurant_rounded,
     'hotel' => Icons.hotel_rounded,
     'local_hospital' => Icons.local_hospital_rounded,
@@ -174,6 +175,10 @@ class HomeScreen extends ConsumerWidget {
                     return InkWell(
                       borderRadius: AppRadius.mdAll,
                       onTap: () {
+                        if (category.typeKey == 'house_rent') {
+                          context.push(AppRoutes.rentalsBrowse);
+                          return;
+                        }
                         final loc = locationAsync.asData?.value;
                         if (loc != null) {
                           context.push(

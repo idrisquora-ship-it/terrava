@@ -15,6 +15,7 @@ class TerravaTextField extends StatefulWidget {
     this.validator,
     this.enabled = true,
     this.autofillHints,
+    this.maxLines = 1,
   });
 
   final TextEditingController? controller;
@@ -29,6 +30,7 @@ class TerravaTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final bool enabled;
   final Iterable<String>? autofillHints;
+  final int maxLines;
 
   @override
   State<TerravaTextField> createState() => _TerravaTextFieldState();
@@ -64,6 +66,7 @@ class _TerravaTextFieldState extends State<TerravaTextField> {
       autofillHints: widget.autofillHints,
       onChanged: widget.onChanged,
       validator: widget.validator,
+      maxLines: widget.obscureText ? 1 : widget.maxLines,
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hint,

@@ -3,16 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/admin/presentation/admin_dashboard_screen.dart';
+import '../../features/admin/presentation/announcements_screen.dart';
+import '../../features/admin/presentation/report_issue_screen.dart';
 import '../../features/auth/controllers/auth_controller.dart';
+import '../../features/auth/controllers/profile_role_providers.dart';
+import '../../features/auth/presentation/account_restricted_screen.dart';
+import '../../features/auth/presentation/choose_role_screen.dart';
 import '../../features/auth/presentation/forgot_password_screen.dart';
 import '../../features/auth/presentation/sign_in_screen.dart';
 import '../../features/auth/presentation/sign_up_screen.dart';
+import '../../features/chat/presentation/chat_thread_screen.dart';
+import '../../features/chat/presentation/inbox_screen.dart';
 import '../../features/directions/presentation/directions_screen.dart';
 import '../../features/favorites/presentation/collection_details_screen.dart';
 import '../../features/favorites/presentation/saved_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/map/presentation/category_map_screen.dart';
 import '../../features/location_details/presentation/location_details_screen.dart';
+import '../../features/listings/presentation/create_listing_screen.dart';
+import '../../features/listings/presentation/listing_alerts_screen.dart';
+import '../../features/listings/presentation/listing_details_screen.dart';
+import '../../features/listings/presentation/my_listings_screen.dart';
+import '../../features/listings/presentation/owner_dashboard_screen.dart';
+import '../../features/listings/presentation/rentals_browse_screen.dart';
+import '../../features/listings/presentation/saved_listings_screen.dart';
 import '../../features/map/presentation/explore_map_screen.dart';
 import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/place_details/presentation/place_details_screen.dart';
@@ -34,6 +49,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   ref.listen(authSessionProvider, (_, __) => refresh.value++);
   ref.listen(onboardingCompleteProvider, (_, __) => refresh.value++);
   ref.listen(isAuthenticatedProvider, (_, __) => refresh.value++);
+  ref.listen(authProfileProvider, (_, __) => refresh.value++);
 
   ref.onDispose(refresh.dispose);
 
@@ -45,11 +61,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) {
       final loggedIn = ref.read(isAuthenticatedProvider);
       final onboarded = ref.read(onboardingCompleteProvider);
+      final needsRole = ref.read(needsRolePickerProvider);
+      final restriction = ref.read(accountRestrictionProvider);
       final loc = state.matchedLocation;
 
       final isSplash = loc == AppRoutes.splash;
       final isOnboarding = loc == AppRoutes.onboarding;
       final isAuth = loc.startsWith('/auth');
+      final isChooseRole = loc == AppRoutes.chooseRole;
+      final isRestricted = loc == AppRoutes.accountRestricted;
 
       if (isSplash) return null;
 
@@ -58,10 +78,20 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       }
 
       if (!loggedIn) {
-        return isAuth ? null : AppRoutes.signIn;
+        return isAuth && !isChooseRole && !isRestricted
+            ? null
+            : AppRoutes.signIn;
       }
 
-      if (isAuth || isOnboarding) {
+      if (restriction != null) {
+        return isRestricted ? null : AppRoutes.accountRestricted;
+      }
+
+      if (needsRole) {
+        return isChooseRole ? null : AppRoutes.chooseRole;
+      }
+
+      if (isAuth || isOnboarding || isChooseRole || isRestricted) {
         return AppRoutes.home;
       }
 
@@ -81,12 +111,23 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
+        path: AppRoutes.accountRestricted,
+        builder: (context, state) {
+          final status = ref.read(accountRestrictionProvider);
+          return AccountRestrictedScreen(status: status);
+        },
+      ),
+      GoRoute(
         path: AppRoutes.signUp,
         builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
         path: AppRoutes.forgotPassword,
         builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.chooseRole,
+        builder: (context, state) => const ChooseRoleScreen(),
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
@@ -168,6 +209,77 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/collection/:id',
         builder: (context, state) => CollectionDetailsScreen(
           collectionId: state.pathParameters['id']!,
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.listingsNew,
+        builder: (context, state) => const CreateListingScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.listingsMine,
+        builder: (context, state) => const MyListingsScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.listingsDashboard,
+        builder: (context, state) => const OwnerDashboardScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.listingsAlerts,
+        builder: (context, state) => const ListingAlertsScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.listingsSaved,
+        builder: (context, state) => const SavedListingsScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.rentalsBrowse,
+        builder: (context, state) => const RentalsBrowseScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.admin,
+        builder: (context, state) => const AdminDashboardScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.reportIssue,
+        builder: (context, state) {
+          final extras = state.extra as Map<String, String?>?;
+          return ReportIssueScreen(
+            relatedUserId: extras?['relatedUserId'],
+            relatedListingId: extras?['relatedListingId'],
+            initialSubject: extras?['subject'],
+          );
+        },
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.announcements,
+        builder: (context, state) => const AnnouncementsScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/listings/:id',
+        builder: (context, state) => ListingDetailsScreen(
+          listingId: state.pathParameters['id']!,
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.inbox,
+        builder: (context, state) => const InboxScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: '/chat/:conversationId',
+        builder: (context, state) => ChatThreadScreen(
+          conversationId: state.pathParameters['conversationId']!,
         ),
       ),
       StatefulShellRoute.indexedStack(

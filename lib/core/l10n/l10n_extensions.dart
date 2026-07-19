@@ -11,6 +11,7 @@ extension L10nContext on BuildContext {
 extension CategoryL10n on PlaceCategory {
   String localizedLabel(AppLocalizations l10n) {
     return switch (id) {
+      'house_rent' => l10n.categoryHouseRent,
       'restaurants' => l10n.categoryRestaurants,
       'hotels' => l10n.categoryHotels,
       'hospitals' => l10n.categoryHospitals,

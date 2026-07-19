@@ -13,6 +13,8 @@ import '../../../shared/services/map_clusterer.dart';
 import '../../../shared/services/places_service.dart';
 import '../../../shared/widgets/place_cards.dart';
 import '../../../shared/widgets/terrava_map.dart';
+import '../../listings/models/listing.dart';
+import '../../listings/repositories/listings_repository.dart';
 
 class ExploreMapScreen extends ConsumerStatefulWidget {
   const ExploreMapScreen({super.key});
@@ -25,6 +27,7 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
   final _mapController = MapController();
   List<Marker> _markers = [];
   List<PlaceSummary> _places = [];
+  List<Listing> _listings = [];
   bool _loading = false;
   double _zoom = 14;
 
@@ -36,7 +39,13 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
             lng: target.longitude,
             radiusMeters: 1800,
           );
+      final listings = await ref.read(listingsRepositoryProvider).nearby(
+            lat: target.latitude,
+            lng: target.longitude,
+            radiusKm: 8,
+          );
       _places = places.where((p) => p.lat != null && p.lng != null).toList();
+      _listings = listings;
       _rebuildMarkers();
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -47,6 +56,16 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
     if (!mounted) return;
     final buckets = const MapClusterer().cluster(places: _places, zoom: _zoom);
     final markers = <Marker>[];
+
+    for (final listing in _listings) {
+      markers.add(
+        terravaPlaceMarker(
+          point: LatLng(listing.lat, listing.lng),
+          label: '★ ${listing.title}',
+          onTap: () => context.push(AppRoutes.listingPath(listing.id)),
+        ),
+      );
+    }
 
     for (final bucket in buckets) {
       if (bucket.items.length == 1) {

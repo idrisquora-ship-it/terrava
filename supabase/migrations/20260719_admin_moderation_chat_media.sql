@@ -1,0 +1,9 @@
+-- Admin moderation + chat media (applied remotely as admin_moderation_chat_media)
+--
+-- profiles: is_admin, account_status, verification_status, verification_note
+-- Seeded existing profiles with is_admin = true
+-- Functions: is_admin(), profiles_guard_sensitive_columns trigger
+-- Tables: issue_reports, announcements
+-- messages: media_url, media_type; body optional when media present
+-- storage bucket: chat-media (50MB)
+-- listing_reports: status, admin_notes + admin policies

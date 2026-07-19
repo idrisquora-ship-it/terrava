@@ -73,12 +73,14 @@ class AuthController extends Notifier<AuthUiState> {
     required String email,
     required String password,
     String? displayName,
+    String role = 'civilian',
   }) async {
     return _run(
       () => _repo.signUpWithEmail(
         email: email,
         password: password,
         displayName: displayName,
+        role: role,
       ),
       promptAppDownload: true,
     );

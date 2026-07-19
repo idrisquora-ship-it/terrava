@@ -1,0 +1,6 @@
+-- Applied remotely: listings_roles_chat + profiles_public_display_read
+--
+-- profiles.role (civilian | business_owner), role_chosen
+-- listings + RLS + listing-images storage
+-- conversations, conversation_participants, messages + Realtime
+-- authenticated can select profiles (display names for chat)

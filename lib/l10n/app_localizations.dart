@@ -1251,6 +1251,1080 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get errorGenericTitle;
+
+  /// No description provided for @roleChooseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose account type'**
+  String get roleChooseTitle;
+
+  /// No description provided for @roleChooseSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick how you will use Terrava. Business owners can list properties and businesses.'**
+  String get roleChooseSubtitle;
+
+  /// No description provided for @roleChooseFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot change this later in the app. Contact support if you chose the wrong type.'**
+  String get roleChooseFootnote;
+
+  /// No description provided for @roleCivilian.
+  ///
+  /// In en, this message translates to:
+  /// **'Civilian'**
+  String get roleCivilian;
+
+  /// No description provided for @roleCivilianHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search neighborhoods, save places, and message listing owners.'**
+  String get roleCivilianHint;
+
+  /// No description provided for @roleBusinessOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Business owner / Agent'**
+  String get roleBusinessOwner;
+
+  /// No description provided for @roleBusinessOwnerShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get roleBusinessOwnerShort;
+
+  /// No description provided for @roleBusinessOwnerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'List houses, restaurants, and other businesses — plus all civilian features.'**
+  String get roleBusinessOwnerHint;
+
+  /// No description provided for @roleSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save account type. Try again.'**
+  String get roleSaveFailed;
+
+  /// No description provided for @listingsCreateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create listing'**
+  String get listingsCreateTitle;
+
+  /// No description provided for @listingsMineTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My listings'**
+  String get listingsMineTitle;
+
+  /// No description provided for @listingsMineEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No listings yet'**
+  String get listingsMineEmptyTitle;
+
+  /// No description provided for @listingsMineEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish a house, shop, or restaurant so people nearby can find you first.'**
+  String get listingsMineEmptyMessage;
+
+  /// No description provided for @listingsKindLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing type'**
+  String get listingsKindLabel;
+
+  /// No description provided for @listingsKindRental.
+  ///
+  /// In en, this message translates to:
+  /// **'Rent'**
+  String get listingsKindRental;
+
+  /// No description provided for @listingsKindSale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale'**
+  String get listingsKindSale;
+
+  /// No description provided for @listingsKindBusiness.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get listingsKindBusiness;
+
+  /// No description provided for @listingsCategoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get listingsCategoryLabel;
+
+  /// No description provided for @listingsTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get listingsTitleLabel;
+
+  /// No description provided for @listingsDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get listingsDescriptionLabel;
+
+  /// No description provided for @listingsPriceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Price (NGN)'**
+  String get listingsPriceLabel;
+
+  /// No description provided for @listingsCityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get listingsCityLabel;
+
+  /// No description provided for @listingsAreaLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Area / neighborhood'**
+  String get listingsAreaLabel;
+
+  /// No description provided for @listingsPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone (optional)'**
+  String get listingsPhoneLabel;
+
+  /// No description provided for @listingsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get listingsRequired;
+
+  /// No description provided for @listingsLocating.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting your location…'**
+  String get listingsLocating;
+
+  /// No description provided for @listingsLocationSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Location set: {lat}, {lng}'**
+  String listingsLocationSet(String lat, String lng);
+
+  /// No description provided for @listingsUseMyLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use my current location'**
+  String get listingsUseMyLocation;
+
+  /// No description provided for @listingsAddPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Add photos'**
+  String get listingsAddPhoto;
+
+  /// No description provided for @listingsPhotosCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}/{max} photos'**
+  String listingsPhotosCount(int count, int max);
+
+  /// No description provided for @listingsPhotosMaxReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum {max} photos per listing.'**
+  String listingsPhotosMaxReached(int max);
+
+  /// No description provided for @listingsManagePhotos.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get listingsManagePhotos;
+
+  /// No description provided for @listingsPublish.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish listing'**
+  String get listingsPublish;
+
+  /// No description provided for @listingsPublishFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not publish listing. Check your connection and role.'**
+  String get listingsPublishFailed;
+
+  /// No description provided for @listingsPhotoFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not upload photo.'**
+  String get listingsPhotoFailed;
+
+  /// No description provided for @listingsLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load listings.'**
+  String get listingsLoadFailed;
+
+  /// No description provided for @listingsNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing not found'**
+  String get listingsNotFound;
+
+  /// No description provided for @listingsListedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Listed on Terrava'**
+  String get listingsListedBadge;
+
+  /// No description provided for @listingsPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause / unpause'**
+  String get listingsPause;
+
+  /// No description provided for @listingsBedrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedrooms'**
+  String get listingsBedrooms;
+
+  /// No description provided for @listingsBathrooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Bathrooms'**
+  String get listingsBathrooms;
+
+  /// No description provided for @listingsBedroomsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} beds'**
+  String listingsBedroomsValue(int count);
+
+  /// No description provided for @listingsBathroomsValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} baths'**
+  String listingsBathroomsValue(int count);
+
+  /// No description provided for @listingsFurnished.
+  ///
+  /// In en, this message translates to:
+  /// **'Furnished'**
+  String get listingsFurnished;
+
+  /// No description provided for @listingsUnfurnished.
+  ///
+  /// In en, this message translates to:
+  /// **'Unfurnished'**
+  String get listingsUnfurnished;
+
+  /// No description provided for @listingsAmenities.
+  ///
+  /// In en, this message translates to:
+  /// **'Amenities'**
+  String get listingsAmenities;
+
+  /// No description provided for @listingsOpeningHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Opening hours'**
+  String get listingsOpeningHours;
+
+  /// No description provided for @listingsServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Menu / services'**
+  String get listingsServices;
+
+  /// No description provided for @listingsServicesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What you offer (menu highlights, services…)'**
+  String get listingsServicesHint;
+
+  /// No description provided for @listingsVerifiedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified on Terrava'**
+  String get listingsVerifiedBadge;
+
+  /// No description provided for @listingsVerifiedComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified badge will be a paid upgrade later. Payment is not enabled yet.'**
+  String get listingsVerifiedComingSoon;
+
+  /// No description provided for @listingsSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save listing'**
+  String get listingsSave;
+
+  /// No description provided for @listingsUnsave.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from saved'**
+  String get listingsUnsave;
+
+  /// No description provided for @listingsSavedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved listings'**
+  String get listingsSavedTitle;
+
+  /// No description provided for @listingsSavedEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved listings'**
+  String get listingsSavedEmptyTitle;
+
+  /// No description provided for @listingsSavedEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Terrava listings you like to revisit them later.'**
+  String get listingsSavedEmptyMessage;
+
+  /// No description provided for @listingsAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing alerts'**
+  String get listingsAlertsTitle;
+
+  /// No description provided for @listingsAlertsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Get remembered filters for new houses/businesses in an area. Push alerts come later — your alert is saved now.'**
+  String get listingsAlertsIntro;
+
+  /// No description provided for @listingsCreateAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Save alert'**
+  String get listingsCreateAlert;
+
+  /// No description provided for @listingsAlertSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert saved.'**
+  String get listingsAlertSaved;
+
+  /// No description provided for @listingsAlertFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save alert.'**
+  String get listingsAlertFailed;
+
+  /// No description provided for @listingsYourAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Your alerts'**
+  String get listingsYourAlerts;
+
+  /// No description provided for @listingsNoAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'No alerts yet.'**
+  String get listingsNoAlerts;
+
+  /// No description provided for @listingsMaxPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Max price (NGN)'**
+  String get listingsMaxPrice;
+
+  /// No description provided for @listingsDashboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing dashboard'**
+  String get listingsDashboardTitle;
+
+  /// No description provided for @listingsStatTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Listings'**
+  String get listingsStatTotal;
+
+  /// No description provided for @listingsStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get listingsStatActive;
+
+  /// No description provided for @listingsStatViews.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get listingsStatViews;
+
+  /// No description provided for @listingsStatMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Message threads'**
+  String get listingsStatMessages;
+
+  /// No description provided for @listingsAvailableFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Available from'**
+  String get listingsAvailableFrom;
+
+  /// No description provided for @listingsPickAvailableFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick available date'**
+  String get listingsPickAvailableFrom;
+
+  /// No description provided for @listingsPricePeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Price type'**
+  String get listingsPricePeriod;
+
+  /// No description provided for @listingsPriceMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get listingsPriceMonthly;
+
+  /// No description provided for @listingsPriceYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get listingsPriceYearly;
+
+  /// No description provided for @listingsPriceNegotiable.
+  ///
+  /// In en, this message translates to:
+  /// **'Negotiable'**
+  String get listingsPriceNegotiable;
+
+  /// No description provided for @listingsPriceTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get listingsPriceTotal;
+
+  /// No description provided for @listingsSetCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as cover'**
+  String get listingsSetCover;
+
+  /// No description provided for @listingsCoverBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover'**
+  String get listingsCoverBadge;
+
+  /// No description provided for @listingsShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get listingsShare;
+
+  /// No description provided for @listingsReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report listing'**
+  String get listingsReport;
+
+  /// No description provided for @listingsReportReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are you reporting this?'**
+  String get listingsReportReason;
+
+  /// No description provided for @listingsReportSpam.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam or scam'**
+  String get listingsReportSpam;
+
+  /// No description provided for @listingsReportWrongInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong information'**
+  String get listingsReportWrongInfo;
+
+  /// No description provided for @listingsReportInappropriate.
+  ///
+  /// In en, this message translates to:
+  /// **'Inappropriate content'**
+  String get listingsReportInappropriate;
+
+  /// No description provided for @listingsReportOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get listingsReportOther;
+
+  /// No description provided for @listingsReportSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — we received your report.'**
+  String get listingsReportSubmitted;
+
+  /// No description provided for @listingsReportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not submit report.'**
+  String get listingsReportFailed;
+
+  /// No description provided for @listingsReportAlready.
+  ///
+  /// In en, this message translates to:
+  /// **'You already reported this listing.'**
+  String get listingsReportAlready;
+
+  /// No description provided for @searchAreaHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Area (e.g. Ayekale, Osogbo)'**
+  String get searchAreaHint;
+
+  /// No description provided for @searchListedSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Listed on Terrava'**
+  String get searchListedSection;
+
+  /// No description provided for @searchListedEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No Terrava listings match yet — try another area or see more places below.'**
+  String get searchListedEmpty;
+
+  /// No description provided for @searchMorePlacesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'More places nearby'**
+  String get searchMorePlacesSection;
+
+  /// No description provided for @chatInboxTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get chatInboxTitle;
+
+  /// No description provided for @chatInboxEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet'**
+  String get chatInboxEmptyTitle;
+
+  /// No description provided for @chatInboxEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message a listing owner from a Terrava listing to start chatting.'**
+  String get chatInboxEmptyMessage;
+
+  /// No description provided for @chatThreadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chatThreadTitle;
+
+  /// No description provided for @chatInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message'**
+  String get chatInputHint;
+
+  /// No description provided for @chatNoMessagesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Say hello to start the conversation.'**
+  String get chatNoMessagesYet;
+
+  /// No description provided for @chatMessageSeller.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get chatMessageSeller;
+
+  /// No description provided for @chatStartFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not start chat.'**
+  String get chatStartFailed;
+
+  /// No description provided for @chatSendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send message.'**
+  String get chatSendFailed;
+
+  /// No description provided for @chatLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load messages.'**
+  String get chatLoadFailed;
+
+  /// No description provided for @chatAttachMedia.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach photo or video'**
+  String get chatAttachMedia;
+
+  /// No description provided for @chatAttachImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send photo'**
+  String get chatAttachImage;
+
+  /// No description provided for @chatAttachVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Send video'**
+  String get chatAttachVideo;
+
+  /// No description provided for @chatOpenVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Open video'**
+  String get chatOpenVideo;
+
+  /// No description provided for @adminTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin dashboard'**
+  String get adminTitle;
+
+  /// No description provided for @adminBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get adminBadge;
+
+  /// No description provided for @adminAccessDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'You need admin access to open this screen.'**
+  String get adminAccessDenied;
+
+  /// No description provided for @adminTabUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get adminTabUsers;
+
+  /// No description provided for @adminTabVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get adminTabVerify;
+
+  /// No description provided for @adminTabIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'Issues'**
+  String get adminTabIssues;
+
+  /// No description provided for @adminTabListingReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Listings'**
+  String get adminTabListingReports;
+
+  /// No description provided for @adminTabAnnounce.
+  ///
+  /// In en, this message translates to:
+  /// **'Announce'**
+  String get adminTabAnnounce;
+
+  /// No description provided for @adminMakeAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Make admin'**
+  String get adminMakeAdmin;
+
+  /// No description provided for @adminRemoveAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove admin'**
+  String get adminRemoveAdmin;
+
+  /// No description provided for @adminSuspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Suspend account'**
+  String get adminSuspend;
+
+  /// No description provided for @adminBlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Block account'**
+  String get adminBlock;
+
+  /// No description provided for @adminActivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Reactivate account'**
+  String get adminActivate;
+
+  /// No description provided for @adminDeleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get adminDeleteAccount;
+
+  /// No description provided for @adminDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Soft-delete this account? They will lose access immediately.'**
+  String get adminDeleteConfirm;
+
+  /// No description provided for @adminActionDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done.'**
+  String get adminActionDone;
+
+  /// No description provided for @adminActionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'That admin action failed.'**
+  String get adminActionFailed;
+
+  /// No description provided for @adminLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load admin data.'**
+  String get adminLoadFailed;
+
+  /// No description provided for @adminNoPendingVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending verification requests.'**
+  String get adminNoPendingVerify;
+
+  /// No description provided for @adminApprove.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get adminApprove;
+
+  /// No description provided for @adminReject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get adminReject;
+
+  /// No description provided for @adminNoIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'No issue reports.'**
+  String get adminNoIssues;
+
+  /// No description provided for @adminNoListingReports.
+  ///
+  /// In en, this message translates to:
+  /// **'No listing reports.'**
+  String get adminNoListingReports;
+
+  /// No description provided for @adminMarkInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark in progress'**
+  String get adminMarkInProgress;
+
+  /// No description provided for @adminMarkResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark resolved'**
+  String get adminMarkResolved;
+
+  /// No description provided for @adminMarkDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get adminMarkDismissed;
+
+  /// No description provided for @adminMarkReviewed.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark reviewed'**
+  String get adminMarkReviewed;
+
+  /// No description provided for @adminRelatedUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Related user'**
+  String get adminRelatedUser;
+
+  /// No description provided for @adminAnnounceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcement title'**
+  String get adminAnnounceTitle;
+
+  /// No description provided for @adminAnnounceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Message to all users'**
+  String get adminAnnounceBody;
+
+  /// No description provided for @adminSendAnnounce.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish announcement'**
+  String get adminSendAnnounce;
+
+  /// No description provided for @adminAnnounceSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcement published.'**
+  String get adminAnnounceSent;
+
+  /// No description provided for @adminPastAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'Past announcements'**
+  String get adminPastAnnouncements;
+
+  /// No description provided for @adminNoAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'No announcements yet.'**
+  String get adminNoAnnouncements;
+
+  /// No description provided for @adminActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get adminActive;
+
+  /// No description provided for @adminInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get adminInactive;
+
+  /// No description provided for @reportIssueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report an issue'**
+  String get reportIssueTitle;
+
+  /// No description provided for @reportIssueIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell admins about a problem with the app, a listing, or another user.'**
+  String get reportIssueIntro;
+
+  /// No description provided for @reportIssueSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get reportIssueSubject;
+
+  /// No description provided for @reportIssueBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the issue'**
+  String get reportIssueBody;
+
+  /// No description provided for @reportIssueSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Send to admins'**
+  String get reportIssueSubmit;
+
+  /// No description provided for @reportIssueSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — admins will review your report.'**
+  String get reportIssueSubmitted;
+
+  /// No description provided for @reportIssueFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send report.'**
+  String get reportIssueFailed;
+
+  /// No description provided for @reportUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Report user'**
+  String get reportUser;
+
+  /// No description provided for @reportUserSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a user'**
+  String get reportUserSubject;
+
+  /// No description provided for @announcementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcementsTitle;
+
+  /// No description provided for @announcementsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No announcements right now.'**
+  String get announcementsEmpty;
+
+  /// No description provided for @verificationRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Request verification'**
+  String get verificationRequest;
+
+  /// No description provided for @verificationRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification request sent. An admin will review it.'**
+  String get verificationRequested;
+
+  /// No description provided for @verificationPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification pending admin approval.'**
+  String get verificationPending;
+
+  /// No description provided for @verificationRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification was rejected. You can request again.'**
+  String get verificationRejected;
+
+  /// No description provided for @verificationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not request verification.'**
+  String get verificationFailed;
+
+  /// No description provided for @accountRestrictedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account restricted'**
+  String get accountRestrictedTitle;
+
+  /// No description provided for @accountRestrictedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account cannot use Terrava right now.'**
+  String get accountRestrictedMessage;
+
+  /// No description provided for @accountSuspendedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account is suspended. Contact support if you think this is a mistake.'**
+  String get accountSuspendedMessage;
+
+  /// No description provided for @accountBlockedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account is blocked.'**
+  String get accountBlockedMessage;
+
+  /// No description provided for @accountDeletedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This account has been deleted.'**
+  String get accountDeletedMessage;
+
+  /// No description provided for @categoryHouseRent.
+  ///
+  /// In en, this message translates to:
+  /// **'House rent'**
+  String get categoryHouseRent;
+
+  /// No description provided for @listingsAddressLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Street address'**
+  String get listingsAddressLabel;
+
+  /// No description provided for @listingsStateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get listingsStateLabel;
+
+  /// No description provided for @rentalsBrowseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Houses for rent'**
+  String get rentalsBrowseTitle;
+
+  /// No description provided for @rentalsBrowseIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse rentals by city and area. Change the city/state anytime to explore a place you want to move to.'**
+  String get rentalsBrowseIntro;
+
+  /// No description provided for @rentalsDetectedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Detected near: {address}'**
+  String rentalsDetectedLocation(String address);
+
+  /// No description provided for @rentalsSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Show rentals'**
+  String get rentalsSearch;
+
+  /// No description provided for @rentalsUseMyCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Use my detected city'**
+  String get rentalsUseMyCity;
+
+  /// No description provided for @rentalsAllAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'All areas'**
+  String get rentalsAllAreas;
+
+  /// No description provided for @rentalsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No rentals here yet'**
+  String get rentalsEmptyTitle;
+
+  /// No description provided for @rentalsEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another city, state, or area — or list a rental if you are a business owner.'**
+  String get rentalsEmptyMessage;
+
+  /// No description provided for @rentalsNoAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Location not set'**
+  String get rentalsNoAddress;
+
+  /// No description provided for @rentalsExploreArea.
+  ///
+  /// In en, this message translates to:
+  /// **'See restaurants, markets & schools nearby'**
+  String get rentalsExploreArea;
+
+  /// No description provided for @searchCityHint.
+  ///
+  /// In en, this message translates to:
+  /// **'City (e.g. Osogbo, Ibadan, Lagos)'**
+  String get searchCityHint;
+
+  /// No description provided for @searchNearMeOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Near my GPS only'**
+  String get searchNearMeOnly;
+
+  /// No description provided for @listingsExploreArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore this neighborhood'**
+  String get listingsExploreArea;
 }
 
 class _AppLocalizationsDelegate

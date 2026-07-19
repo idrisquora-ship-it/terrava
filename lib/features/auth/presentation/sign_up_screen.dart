@@ -8,6 +8,7 @@ import '../../../core/theme/app_tokens.dart';
 import '../../../shared/widgets/terrava_button.dart';
 import '../../../shared/widgets/terrava_text_field.dart';
 import '../controllers/auth_controller.dart';
+import '../models/user_role.dart';
 import '../widgets/auth_widgets.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -22,6 +23,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  UserRole _role = UserRole.civilian;
 
   @override
   void dispose() {
@@ -35,6 +37,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   Widget build(BuildContext context) {
     final auth = ref.watch(authControllerProvider);
     final l10n = context.l10n;
+    final theme = Theme.of(context);
 
     return AuthScaffold(
       title: l10n.authCreateAccountTitle,
@@ -69,6 +72,38 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   : null,
             ),
             const SizedBox(height: AppSpacing.lg),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(l10n.roleChooseTitle, style: theme.textTheme.titleSmall),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            SegmentedButton<UserRole>(
+              segments: [
+                ButtonSegment(
+                  value: UserRole.civilian,
+                  label: Text(l10n.roleCivilian),
+                  icon: const Icon(Icons.person_outline_rounded),
+                ),
+                ButtonSegment(
+                  value: UserRole.businessOwner,
+                  label: Text(l10n.roleBusinessOwnerShort),
+                  icon: const Icon(Icons.storefront_outlined),
+                ),
+              ],
+              selected: {_role},
+              onSelectionChanged: (value) {
+                setState(() => _role = value.first);
+              },
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              _role == UserRole.businessOwner
+                  ? l10n.roleBusinessOwnerHint
+                  : l10n.roleCivilianHint,
+              style: theme.textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AppSpacing.lg),
             if (auth.errorMessage != null) ...[
               Text(
                 auth.errorMessage!,
@@ -93,15 +128,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           email: _email.text,
                           password: _password.text,
                           displayName: _name.text,
+                          role: _role.dbValue,
                         );
                 if (!mounted) return;
                 if (ok) {
                   messenger.showSnackBar(
-                    SnackBar(
-                      content: Text(message),
-                    ),
+                    SnackBar(content: Text(message)),
                   );
-                  // Confirm-email off → session exists → router sends home.
                   router.go(AppRoutes.home);
                 }
               },

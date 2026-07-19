@@ -7,15 +7,20 @@ class TerravaAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.actions,
     this.centerTitle = false,
+    this.bottom,
   });
 
   final String? title;
   final Widget? leading;
   final List<Widget>? actions;
   final bool centerTitle;
+  final PreferredSizeWidget? bottom;
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize {
+    final bottomHeight = bottom?.preferredSize.height ?? 0;
+    return Size.fromHeight(kToolbarHeight + bottomHeight);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,7 @@ class TerravaAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading,
       actions: actions,
       centerTitle: centerTitle,
+      bottom: bottom,
     );
   }
 }
