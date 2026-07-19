@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +11,7 @@ import '../../../shared/models/place_models.dart';
 import '../../../shared/services/history_repository.dart';
 import '../../../shared/services/location_service.dart';
 import '../../../shared/services/places_service.dart';
+import '../../../shared/widgets/app_download_dialog.dart';
 import '../../../shared/widgets/empty_error_state.dart';
 import '../../../shared/widgets/place_cards.dart';
 import '../../../shared/widgets/section_header.dart';
@@ -96,7 +98,23 @@ class HomeScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(l10n.appName, style: theme.textTheme.displayMedium),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              l10n.appName,
+                              style: theme.textTheme.displayMedium,
+                            ),
+                          ),
+                          if (kIsWeb)
+                            IconButton(
+                              tooltip: l10n.downloadApkTooltip,
+                              onPressed: launchAndroidApkDownload,
+                              icon: const Icon(Icons.download_rounded),
+                            ),
+                        ],
+                      ),
                       const SizedBox(height: AppSpacing.xs),
                       Text(
                         l10n.homeTagline,

@@ -2325,6 +2325,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore this neighborhood'**
   String get listingsExploreArea;
+
+  /// No description provided for @downloadApkTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Download Android APK'**
+  String get downloadApkTooltip;
 }
 
 class _AppLocalizationsDelegate

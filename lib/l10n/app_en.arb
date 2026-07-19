@@ -454,5 +454,6 @@
   "rentalsExploreArea": "See restaurants, markets & schools nearby",
   "searchCityHint": "City (e.g. Osogbo, Ibadan, Lagos)",
   "searchNearMeOnly": "Near my GPS only",
-  "listingsExploreArea": "Explore this neighborhood"
+  "listingsExploreArea": "Explore this neighborhood",
+  "downloadApkTooltip": "Download Android APK"
 }

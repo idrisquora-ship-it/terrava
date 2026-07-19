@@ -5,6 +5,13 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/constants/app_download.dart';
 import '../../core/theme/app_tokens.dart';
 
+/// Opens the hosted Android APK download (web only).
+Future<void> launchAndroidApkDownload() async {
+  if (!kIsWeb) return;
+  final uri = Uri.base.resolve(kAndroidApkDownloadPath);
+  await launchUrl(uri, webOnlyWindowName: '_self');
+}
+
 /// Shows the website APK install prompt (web only).
 Future<void> showAppDownloadDialog(BuildContext context) async {
   if (!kIsWeb) return;
@@ -38,8 +45,7 @@ Future<void> showAppDownloadDialog(BuildContext context) async {
           ),
           FilledButton.icon(
             onPressed: () async {
-              final uri = Uri.base.resolve(kAndroidApkDownloadPath);
-              await launchUrl(uri, webOnlyWindowName: '_self');
+              await launchAndroidApkDownload();
               if (ctx.mounted) Navigator.of(ctx).pop();
             },
             icon: const Icon(Icons.download_rounded),

@@ -1194,4 +1194,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get listingsExploreArea => 'Explore this neighborhood';
+
+  @override
+  String get downloadApkTooltip => 'Download Android APK';
 }
