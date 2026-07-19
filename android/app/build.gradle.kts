@@ -30,7 +30,6 @@ fun readEnvValue(key: String): String {
     return ""
 }
 
-val mapsApiKey = readEnvValue("GOOGLE_MAPS_API_KEY")
 val googleWebClientId = readEnvValue("GOOGLE_OAUTH_CLIENT_ID")
 
 // Write Google/auth strings as resources (avoids AGP resValues feature flags).
@@ -63,7 +62,6 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        manifestPlaceholders["GOOGLE_MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {

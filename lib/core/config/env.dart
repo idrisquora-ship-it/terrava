@@ -33,19 +33,20 @@ class Env {
         const ['EXPO_PUBLIC_SUPABASE_ANON_KEY'],
       );
 
-  static String get googleMapsApiKey {
-    if (kIsWeb) {
-      final web = _readAlias(
-        'GOOGLE_MAPS_WEB_API_KEY',
-        const ['GOOGLE_MAPS_API_KEY', 'EXPO_PUBLIC_GOOGLE_MAPS_API_KEY'],
+  /// Mapbox public access token (maps tiles, geocoding, directions).
+  static String get mapboxAccessToken => _readAlias(
+        'MAPBOX_ACCESS_TOKEN',
+        const [
+          'MAPBOX_PUBLIC_TOKEN',
+          'EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN',
+        ],
       );
-      if (web.isNotEmpty) return web;
-    }
-    return _readAlias(
-      'GOOGLE_MAPS_API_KEY',
-      const ['EXPO_PUBLIC_GOOGLE_MAPS_API_KEY'],
-    );
-  }
+
+  /// Foursquare Places API key (nearby search + place details).
+  static String get foursquareApiKey => _readAlias(
+        'FOURSQUARE_API_KEY',
+        const ['EXPO_PUBLIC_FOURSQUARE_API_KEY'],
+      );
 
   static String get googleOauthClientId => _readAlias(
         'GOOGLE_OAUTH_CLIENT_ID',
@@ -77,10 +78,6 @@ class Env {
   static String get sentryDsn => _read('SENTRY_DSN');
 
   /// Deep link / URL used for password-reset emails and browser OAuth callbacks.
-  /// Must also be listed in Supabase → Authentication → URL Configuration.
-  ///
-  /// Mobile uses the custom scheme; web prefers [WEB_AUTH_REDIRECT_URL] or the
-  /// current page origin so the same codebase works for both targets.
   static String get authRedirectUrl {
     if (kIsWeb) {
       final web = _read('WEB_AUTH_REDIRECT_URL');
@@ -100,6 +97,20 @@ class Env {
     return id.isNotEmpty &&
         !id.contains('YOUR_GOOGLE') &&
         id.contains('.apps.googleusercontent.com');
+  }
+
+  static bool get hasValidMapboxConfig {
+    final t = mapboxAccessToken;
+    return t.isNotEmpty && !t.contains('YOUR_MAPBOX') && t.startsWith('pk.');
+  }
+
+  static bool get hasValidFoursquareConfig {
+    final k = foursquareApiKey;
+    if (k.isEmpty) return false;
+    if (k.contains('YOUR_FOURSQUARE')) return false;
+    if (k.toLowerCase() == 'places api key') return false;
+    // Real service keys are long opaque strings, not short labels.
+    return k.length >= 20;
   }
 
   static bool get hasValidSupabaseConfig {

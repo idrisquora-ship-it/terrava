@@ -1,5 +1,5 @@
-# Injects Maps + Google Sign-In values from .env into web/index.html
-# so the website uses the same secrets source as the Flutter app.
+# Injects Google Sign-In client id into web/index.html from .env.
+# Map tiles come from Mapbox at runtime (flutter_map) — no Maps JS script needed.
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $envFile = Join-Path $root '.env'
@@ -14,20 +14,23 @@ function Read-EnvValue([string]$key) {
   return ($line -split '=', 2)[1].Trim().Trim('"').Trim("'")
 }
 
-$mapsKey = Read-EnvValue 'GOOGLE_MAPS_WEB_API_KEY'
-if ([string]::IsNullOrWhiteSpace($mapsKey)) {
-  $mapsKey = Read-EnvValue 'GOOGLE_MAPS_API_KEY'
-}
 $oauthId = Read-EnvValue 'GOOGLE_OAUTH_CLIENT_ID'
-
-if ([string]::IsNullOrWhiteSpace($mapsKey) -or $mapsKey.StartsWith('YOUR_')) {
-  Write-Warning 'GOOGLE_MAPS_API_KEY missing/placeholder - Maps will not load on web.'
+$mapbox = Read-EnvValue 'MAPBOX_ACCESS_TOKEN'
+if ([string]::IsNullOrWhiteSpace($mapbox)) {
+  $mapbox = Read-EnvValue 'MAPBOX_PUBLIC_TOKEN'
 }
+$fsq = Read-EnvValue 'FOURSQUARE_API_KEY'
+
 if ([string]::IsNullOrWhiteSpace($oauthId) -or $oauthId.StartsWith('YOUR_')) {
   Write-Warning 'GOOGLE_OAUTH_CLIENT_ID missing/placeholder - Google Sign-In will fail on web.'
 }
+if ([string]::IsNullOrWhiteSpace($mapbox) -or $mapbox.StartsWith('pk.YOUR_') -or -not $mapbox.StartsWith('pk.')) {
+  Write-Warning 'MAPBOX_ACCESS_TOKEN / MAPBOX_PUBLIC_TOKEN missing/placeholder - maps will not load.'
+}
+if ([string]::IsNullOrWhiteSpace($fsq) -or $fsq.StartsWith('YOUR_')) {
+  Write-Warning 'FOURSQUARE_API_KEY missing/placeholder - nearby places will fail.'
+}
 
-# ASCII-only template so Windows PowerShell encoding cannot corrupt the file.
 $html = @"
 <!DOCTYPE html>
 <html>
@@ -43,7 +46,6 @@ $html = @"
   <!-- Google Sign-In (Web client ID from .env) -->
   <meta name="google-signin-client_id" content="$oauthId">
 
-  <!-- iOS / PWA -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Terrava">
@@ -52,9 +54,6 @@ $html = @"
   <link rel="icon" type="image/png" href="favicon.png"/>
   <title>Terrava</title>
   <link rel="manifest" href="manifest.json">
-
-  <!-- Google Maps JavaScript API (required by google_maps_flutter_web) -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=$mapsKey"></script>
 
   <style>
     html, body {
@@ -92,4 +91,4 @@ $html = @"
 "@
 
 [System.IO.File]::WriteAllText($indexPath, $html.Replace("`r`n", "`n"))
-Write-Host 'Prepared web/index.html from .env'
+Write-Host 'Prepared web/index.html from .env (Mapbox tiles load at runtime)'

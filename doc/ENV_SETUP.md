@@ -9,7 +9,9 @@ APP_NAME=Terrava
 SUPABASE_URL=https://ghwokfnrimqpvuiuzaly.supabase.co
 SUPABASE_ANON_KEY=your_anon_or_publishable_key
 
-GOOGLE_MAPS_API_KEY=your_maps_key
+MAPBOX_ACCESS_TOKEN=pk.your_mapbox_token
+FOURSQUARE_API_KEY=your_foursquare_key
+
 GOOGLE_OAUTH_CLIENT_ID=your_oauth_client_id.apps.googleusercontent.com
 
 WEATHER_API_KEY=your_weather_key
@@ -23,8 +25,9 @@ ENABLE_AI_SUMMARY=false
 ## Rules
 
 - Never commit `.env`
-- Never put OAuth **client secrets** in the mobile app
-- Android package for key restriction / Firebase: `com.terrava.terrava`
+- Never put OAuth **client secrets** in the client
+- Android package for Firebase: `com.terrava.terrava`
 - Copy from `.env.example`
+- Location stack setup: `doc/MAPBOX_FOURSQUARE_SETUP.md`
 
 `Env` also accepts legacy `EXPO_PUBLIC_*` aliases if you still have them, but Flutter names are preferred.

@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/env.dart';
-import 'google_request_headers.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
@@ -19,17 +18,25 @@ final dioProvider = Provider<Dio>((ref) {
 
   dio.interceptors.add(
     InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        final isGoogle = options.uri.host.endsWith('googleapis.com');
-        if (isGoogle) {
+      onRequest: (options, handler) {
+        final host = options.uri.host;
+        if (host.contains('api.mapbox.com')) {
           options.queryParameters.putIfAbsent(
-            'key',
-            () => Env.googleMapsApiKey,
+            'access_token',
+            () => Env.mapboxAccessToken,
           );
-          // Identify the app so Android-restricted API keys are accepted
-          // by Google Web Service endpoints (Places, Geocoding, etc.).
-          final headers = await googleApiRequestHeaders();
-          options.headers.addAll(headers);
+        }
+        // Legacy v3 + current Places API hosts.
+        if (host.contains('foursquare.com')) {
+          final key = Env.foursquareApiKey;
+          // New Places API expects Bearer; legacy v3 accepted the raw key.
+          options.headers['Authorization'] =
+              key.startsWith('Bearer ') ? key : 'Bearer $key';
+          options.headers.putIfAbsent('Accept', () => 'application/json');
+          options.headers.putIfAbsent(
+            'X-Places-Api-Version',
+            () => '2025-06-17',
+          );
         }
         handler.next(options);
       },

@@ -85,13 +85,36 @@ class AutocompleteSuggestion extends Equatable {
     required this.description,
     this.mainText,
     this.secondaryText,
+    this.lat,
+    this.lng,
+    this.isPoi = false,
   });
 
   final String placeId;
   final String description;
   final String? mainText;
   final String? secondaryText;
+  final double? lat;
+  final double? lng;
+
+  /// True when Mapbox classifies the feature as a point of interest.
+  final bool isPoi;
 
   @override
   List<Object?> get props => [placeId];
+}
+
+class RouteDirections extends Equatable {
+  const RouteDirections({
+    required this.points,
+    required this.distanceText,
+    required this.durationText,
+  });
+
+  final List<({double lat, double lng})> points;
+  final String distanceText;
+  final String durationText;
+
+  @override
+  List<Object?> get props => [distanceText, durationText, points.length];
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -49,6 +50,9 @@ final isAuthenticatedProvider = Provider<bool>((ref) {
   return ref.watch(currentUserProvider) != null;
 });
 
+/// Set on successful web sign-in / sign-up so [AppShell] can prompt for APK.
+final pendingAppDownloadPromptProvider = StateProvider<bool>((ref) => false);
+
 final authControllerProvider =
     NotifierProvider<AuthController, AuthUiState>(AuthController.new);
 
@@ -59,7 +63,10 @@ class AuthController extends Notifier<AuthUiState> {
   AuthUiState build() => const AuthUiState();
 
   Future<bool> signIn({required String email, required String password}) async {
-    return _run(() => _repo.signInWithEmail(email: email, password: password));
+    return _run(
+      () => _repo.signInWithEmail(email: email, password: password),
+      promptAppDownload: true,
+    );
   }
 
   Future<bool> signUp({
@@ -73,15 +80,16 @@ class AuthController extends Notifier<AuthUiState> {
         password: password,
         displayName: displayName,
       ),
+      promptAppDownload: true,
     );
   }
 
   Future<bool> signInWithGoogle() async {
-    return _run(_repo.signInWithGoogle);
+    return _run(_repo.signInWithGoogle, promptAppDownload: true);
   }
 
   Future<bool> signInWithApple() async {
-    return _run(_repo.signInWithApple);
+    return _run(_repo.signInWithApple, promptAppDownload: true);
   }
 
   Future<bool> sendPasswordReset(String email) async {
@@ -127,11 +135,17 @@ class AuthController extends Notifier<AuthUiState> {
     }
   }
 
-  Future<bool> _run(Future<dynamic> Function() action) async {
+  Future<bool> _run(
+    Future<dynamic> Function() action, {
+    bool promptAppDownload = false,
+  }) async {
     state = state.copyWith(isLoading: true, clearError: true, clearInfo: true);
     try {
       await action();
       state = state.copyWith(isLoading: false);
+      if (promptAppDownload && kIsWeb) {
+        ref.read(pendingAppDownloadPromptProvider.notifier).state = true;
+      }
       return true;
     } catch (e) {
       state = state.copyWith(

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/config/user_preferences.dart';
@@ -17,6 +17,7 @@ import '../../../shared/widgets/place_cards.dart';
 import '../../../shared/widgets/section_header.dart';
 import '../../../shared/widgets/skeleton.dart';
 import '../../../shared/widgets/terrava_button.dart';
+import '../../../shared/widgets/terrava_map.dart';
 import '../../favorites/controllers/favorites_controller.dart';
 import '../../scoring/services/insight_services.dart';
 
@@ -101,20 +102,16 @@ class _LocationDetailsScreenState extends ConsumerState<LocationDetailsScreen> {
             expandedHeight: 220,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(widget.lat, widget.lng),
-                  zoom: 14,
-                ),
-                markers: {
-                  Marker(
-                    markerId: const MarkerId('center'),
-                    position: LatLng(widget.lat, widget.lng),
+              background: TerravaMap(
+                center: LatLng(widget.lat, widget.lng),
+                zoom: 14,
+                interactive: false,
+                markers: [
+                  terravaPlaceMarker(
+                    point: LatLng(widget.lat, widget.lng),
+                    label: 'Center',
                   ),
-                },
-                zoomControlsEnabled: false,
-                myLocationButtonEnabled: false,
-                liteModeEnabled: true,
+                ],
               ),
             ),
           ),

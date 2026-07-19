@@ -31,7 +31,8 @@ git push
 
 ## Docs
 
-- `doc/WEB_SETUP.md` — Flutter web + Google Cloud
+- `doc/MAPBOX_FOURSQUARE_SETUP.md` — Mapbox maps + Foursquare places
+- `doc/WEB_SETUP.md` — Flutter web
 - `doc/VERCEL.md` — Vercel deploy
 - `doc/AUTH_SETUP.md` — Auth
 - `.env.example` — env template (never commit `.env`)

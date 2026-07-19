@@ -54,21 +54,28 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     await ref.read(historyRepositoryProvider).addSearch(
           query: suggestion.description,
           resultPlaceId: suggestion.placeId,
+          lat: suggestion.lat,
+          lng: suggestion.lng,
         );
-    final details =
-        await ref.read(placesServiceProvider).placeDetails(suggestion.placeId);
     if (!mounted) return;
-    if (details.lat != null && details.lng != null) {
-      final isEstablishment = details.types.contains('establishment') ||
-          details.types.contains('point_of_interest');
-      if (isEstablishment) {
-        context.push(AppRoutes.placeDetailsPath(details.placeId));
-      } else {
-        context.push(AppRoutes.locationDetailsPath(details.lat!, details.lng!));
-      }
-    } else {
-      context.push(AppRoutes.placeDetailsPath(details.placeId));
+    if (suggestion.lat != null && suggestion.lng != null) {
+      // Mapbox suggestions are areas/POIs by coordinates — open neighborhood.
+      context.push(
+        AppRoutes.locationDetailsPath(suggestion.lat!, suggestion.lng!),
+      );
+      return;
     }
+    final geo =
+        await ref.read(placesServiceProvider).geocode(suggestion.description);
+    if (!mounted || geo == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.searchNoResults)),
+        );
+      }
+      return;
+    }
+    context.push(AppRoutes.locationDetailsPath(geo.lat, geo.lng));
   }
 
   Future<void> _submitRaw(String query) async {

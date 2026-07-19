@@ -8,21 +8,27 @@ All API I/O lives in **Services**. Widgets never call Dio/Google/Supabase direct
 |-----|----------|
 | `SUPABASE_URL` | Backend |
 | `SUPABASE_ANON_KEY` | Client auth/data (RLS-protected) |
-| `GOOGLE_MAPS_API_KEY` | Maps SDK + Places/Geocoding/Directions/Timezone (restrict by app + APIs) |
+| `MAPBOX_ACCESS_TOKEN` | Map tiles, geocoding, directions |
+| `FOURSQUARE_API_KEY` | Nearby places + place details |
+| `GOOGLE_OAUTH_CLIENT_ID` | Google Sign-In only (not Maps) |
 | `WEATHER_API_KEY` | WeatherAPI |
 | `EXCHANGE_RATE_API_KEY` | ExchangeRate API |
 
 Never hardcode secrets. Never commit `.env` with production values.
 
-## Google
+## Mapbox + Foursquare
 
-| API | Milestone | Service responsibility |
-|-----|-----------|------------------------|
-| Maps SDK Flutter | M5 | Render map, markers, polylines |
-| Places | M3–M7 | Autocomplete, nearby, details, photos |
-| Geocoding | M3–M6 | Forward/reverse geocode, coordinates |
-| Directions | M8 | Routes, legs, traffic duration when available |
-| Timezone | M8/M11 | Local time for location |
+| API | Service responsibility |
+|-----|------------------------|
+| Mapbox tiles (`flutter_map`) | Map UI on Android + Web |
+| Mapbox Geocoding | Autocomplete, forward/reverse geocode |
+| Mapbox Directions | Route polylines |
+| Foursquare Places | Nearby by category, place details |
+
+See `doc/MAPBOX_FOURSQUARE_SETUP.md`.
+
+## Google (auth only)
+
 
 **Key restriction:** Android package + SHA-1; iOS bundle id; limit APIs.
 

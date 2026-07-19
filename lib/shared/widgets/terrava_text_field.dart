@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TerravaTextField extends StatelessWidget {
+class TerravaTextField extends StatefulWidget {
   const TerravaTextField({
     super.key,
     this.controller,
@@ -31,21 +31,54 @@ class TerravaTextField extends StatelessWidget {
   final Iterable<String>? autofillHints;
 
   @override
+  State<TerravaTextField> createState() => _TerravaTextFieldState();
+}
+
+class _TerravaTextFieldState extends State<TerravaTextField> {
+  late bool _obscured;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscured = widget.obscureText;
+  }
+
+  @override
+  void didUpdateWidget(covariant TerravaTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.obscureText != widget.obscureText) {
+      _obscured = widget.obscureText;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final showToggle = widget.obscureText && widget.suffixIcon == null;
+
     return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      enabled: enabled,
-      autofillHints: autofillHints,
-      onChanged: onChanged,
-      validator: validator,
+      controller: widget.controller,
+      obscureText: showToggle ? _obscured : widget.obscureText,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      enabled: widget.enabled,
+      autofillHints: widget.autofillHints,
+      onChanged: widget.onChanged,
+      validator: widget.validator,
       decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
+        labelText: widget.label,
+        hintText: widget.hint,
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: showToggle
+            ? IconButton(
+                tooltip: _obscured ? 'Show password' : 'Hide password',
+                onPressed: () => setState(() => _obscured = !_obscured),
+                icon: Icon(
+                  _obscured
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                ),
+              )
+            : widget.suffixIcon,
       ),
     );
   }

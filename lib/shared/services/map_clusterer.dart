@@ -1,6 +1,4 @@
-import 'dart:ui';
-
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../models/place_models.dart';
 
@@ -18,8 +16,9 @@ class ClusterBucket {
   LatLng get center {
     final lat = items.map((e) => e.location.latitude).reduce((a, b) => a + b) /
         items.length;
-    final lng = items.map((e) => e.location.longitude).reduce((a, b) => a + b) /
-        items.length;
+    final lng =
+        items.map((e) => e.location.longitude).reduce((a, b) => a + b) /
+            items.length;
     return LatLng(lat, lng);
   }
 }
@@ -36,7 +35,6 @@ class MapClusterer {
         .map(PlaceClusterItem.new)
         .toList();
 
-    // Higher zoom => finer grid => fewer clusters.
     final cell = zoom >= 15
         ? 0.005
         : zoom >= 13
@@ -54,13 +52,3 @@ class MapClusterer {
     return buckets.values.map(ClusterBucket.new).toList();
   }
 }
-
-Future<BitmapDescriptor> clusterIcon(int count) async {
-  // Use default hue markers; cluster count shown in infoWindow title.
-  if (count <= 1) {
-    return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
-  }
-  return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
-}
-
-Size clusterLogicalSize(int count) => Size(40 + (count > 9 ? 8 : 0), 40);

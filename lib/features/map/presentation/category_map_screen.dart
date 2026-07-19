@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../core/constants/app_routes.dart';
 import '../../../core/constants/place_categories.dart';
 import '../../../core/l10n/l10n_extensions.dart';
 import '../../../core/theme/app_tokens.dart';
-import '../../../core/theme/map_styles.dart';
 import '../../../shared/models/place_models.dart';
 import '../../../shared/services/location_service.dart';
 import '../../../shared/services/places_service.dart';
@@ -15,11 +15,9 @@ import '../../../shared/widgets/empty_error_state.dart';
 import '../../../shared/widgets/place_cards.dart';
 import '../../../shared/widgets/terrava_app_bar.dart';
 import '../../../shared/widgets/terrava_button.dart';
+import '../../../shared/widgets/terrava_map.dart';
 import '../../favorites/controllers/favorites_controller.dart';
 
-/// Map-first category browser: shows only places of [type] around the
-/// user's detected location (or an explicit [lat]/[lng] area from search),
-/// so the user can pick one and save it.
 class CategoryMapScreen extends ConsumerStatefulWidget {
   const CategoryMapScreen({
     super.key,
@@ -37,9 +35,9 @@ class CategoryMapScreen extends ConsumerStatefulWidget {
 }
 
 class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
-  GoogleMapController? _controller;
+  final _mapController = MapController();
   List<PlaceSummary> _places = [];
-  Set<Marker> _markers = {};
+  List<Marker> _markers = [];
   bool _loading = true;
   bool _showList = false;
   String? _error;
@@ -56,10 +54,8 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
     if (widget.lat != null && widget.lng != null) {
       center = LatLng(widget.lat!, widget.lng!);
     } else {
-      // Always resolve fresh — don't reuse a cached failed location attempt.
       ref.invalidate(currentLocationProvider);
-      final result =
-          await ref.read(locationServiceProvider).resolveCurrent();
+      final result = await ref.read(locationServiceProvider).resolveCurrent();
       if (!mounted) return;
       if (result.location != null) {
         center = LatLng(result.location!.lat, result.location!.lng);
@@ -82,7 +78,7 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
       _center = center;
       _error = null;
     });
-    await _controller?.animateCamera(CameraUpdate.newLatLngZoom(center, 14));
+    _mapController.move(center, 14);
     await _load(center);
   }
 
@@ -100,19 +96,14 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
           );
       if (!mounted) return;
       _places = places.where((p) => p.lat != null && p.lng != null).toList();
-      _markers = {
+      _markers = [
         for (final p in _places)
-          Marker(
-            markerId: MarkerId(p.placeId),
-            position: LatLng(p.lat!, p.lng!),
-            infoWindow: InfoWindow(
-              title: p.name,
-              snippet:
-                  p.rating == null ? null : '★ ${p.rating!.toStringAsFixed(1)}',
-            ),
+          terravaPlaceMarker(
+            point: LatLng(p.lat!, p.lng!),
+            label: p.name,
             onTap: () => _showPlaceSheet(p),
           ),
-      };
+      ];
     } catch (e) {
       if (mounted) _error = e.toString();
     } finally {
@@ -198,20 +189,16 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
   Future<void> _focusPlace(PlaceSummary place) async {
     if (place.lat == null || place.lng == null) return;
     setState(() => _showList = false);
-    await _controller?.animateCamera(
-      CameraUpdate.newLatLngZoom(LatLng(place.lat!, place.lng!), 16),
-    );
-    await _controller?.showMarkerInfoWindow(MarkerId(place.placeId));
+    _mapController.move(LatLng(place.lat!, place.lng!), 16);
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final matched = kPlaceCategories.where((c) => c.googleType == widget.type);
+    final matched = kPlaceCategories.where((c) => c.typeKey == widget.type);
     final title = matched.isEmpty
         ? widget.type.replaceAll('_', ' ')
         : matched.first.localizedLabel(l10n);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final center = _center ?? const LatLng(6.5244, 3.3792);
 
     return Scaffold(
@@ -226,14 +213,11 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
       ),
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: CameraPosition(target: center, zoom: 14),
-            style: isDark ? TerravaMapStyles.dark : TerravaMapStyles.light,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            mapToolbarEnabled: false,
+          TerravaMap(
+            mapController: _mapController,
+            center: center,
+            zoom: 14,
             markers: _markers,
-            onMapCreated: (controller) => _controller = controller,
           ),
           if (_showList)
             ColoredBox(
@@ -256,7 +240,6 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
                     ),
             )
           else ...[
-            // Horizontal result carousel pinned above the bottom edge.
             if (_places.isNotEmpty)
               Positioned(
                 left: 0,
@@ -288,9 +271,7 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
                               child: IconButton(
                                 tooltip: l10n.commonSave,
                                 iconSize: 20,
-                                icon: const Icon(
-                                  Icons.bookmark_add_outlined,
-                                ),
+                                icon: const Icon(Icons.bookmark_add_outlined),
                                 onPressed: () => _savePlace(place),
                               ),
                             ),
@@ -357,9 +338,8 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
                 tooltip: l10n.mapMyLocation,
                 onPressed: () async {
                   ref.invalidate(currentLocationProvider);
-                  final result = await ref
-                      .read(locationServiceProvider)
-                      .resolveCurrent();
+                  final result =
+                      await ref.read(locationServiceProvider).resolveCurrent();
                   if (!mounted) return;
                   final loc = result.location;
                   if (loc == null) {
@@ -379,9 +359,7 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
                     _center = target;
                     _error = null;
                   });
-                  await _controller?.animateCamera(
-                    CameraUpdate.newLatLngZoom(target, 14),
-                  );
+                  _mapController.move(target, 14);
                   await _load(target);
                 },
                 icon: const Icon(Icons.my_location_rounded),

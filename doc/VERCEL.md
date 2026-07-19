@@ -1,33 +1,33 @@
 # Terrava website (Vercel)
 
-This repo serves the **Flutter Web** build of Terrava.
+Prebuilt Flutter Web output lives in `public/`.
 
-## Deploy on Vercel
+## Deploy
 
-1. Import [idrisquora-ship-it/terrava](https://github.com/idrisquora-ship-it/terrava) in [Vercel](https://vercel.com/new).
-2. Framework preset: **Other**
-3. Output directory: `public` (already set in `vercel.json`)
-4. Build command: leave empty (prebuilt static site)
+1. Import the GitHub repo in [Vercel](https://vercel.com/new).
+2. Framework: **Other**
+3. Output directory: `public`
+4. Build command: empty
 5. Deploy
 
-### After deploy — Google Cloud
+## After deploy
 
-1. Create/use a **browser-restricted** Maps API key (`GOOGLE_MAPS_WEB_API_KEY`).
-2. Add your Vercel domain to HTTP referrers, e.g. `https://your-app.vercel.app/*`
-3. Enable Billing + Places / Geocoding / Maps JavaScript API.
-4. Google OAuth Web client → Authorized JavaScript origins: `https://your-app.vercel.app`
-5. Supabase → Authentication → URL Configuration: add `https://your-app.vercel.app/**`
+1. Mapbox token URL restrictions: `https://your-app.vercel.app/*`
+2. Google OAuth JS origins: `https://your-app.vercel.app`
+3. Supabase redirects: `https://your-app.vercel.app/**`
+4. Confirm `MAPBOX_ACCESS_TOKEN` + `FOURSQUARE_API_KEY` were present when `public/` was built (they ship inside Flutter assets)
 
-## Local rebuild (developers)
+See [MAPBOX_FOURSQUARE_SETUP.md](MAPBOX_FOURSQUARE_SETUP.md).
 
-From the Flutter project root:
+## Android APK download
+
+Release APK is copied to `public/downloads/terrava.apk` and offered on web after each sign-in.
 
 ```powershell
 $env:Path = "C:\Users\DELL\flutter\bin;$env:Path"
-.\tool\prepare_web.ps1
-flutter build web --release --base-href=/
-Remove-Item -Recurse -Force public -ErrorAction SilentlyContinue
-Copy-Item -Path build\web\* -Destination public -Recurse -Force
+flutter build apk --release
+New-Item -ItemType Directory -Force -Path public\downloads | Out-Null
+Copy-Item build\app\outputs\flutter-apk\app-release.apk public\downloads\terrava.apk -Force
 ```
 
-Then commit and push `public/` to update the live site.
+Then rebuild web into `public/` (prepare_web + `flutter build web` + copy) and push.

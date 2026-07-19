@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'core/config/app_preferences.dart';
 import 'core/config/env.dart';
-import 'core/network/google_request_headers.dart';
 import 'core/network/supabase_client.dart';
 import 'core/services/fcm_service.dart';
 
@@ -29,10 +26,6 @@ Future<void> main() async {
 
   final prefs = await SharedPreferences.getInstance();
   final supabaseReady = await initializeSupabaseIfConfigured();
-
-  // Warm up app-identity headers so Google API calls (and photo images)
-  // work with an Android-restricted Maps key from the first request.
-  unawaited(googleApiRequestHeaders());
 
   var firebaseReady = false;
   if (!kIsWeb) {

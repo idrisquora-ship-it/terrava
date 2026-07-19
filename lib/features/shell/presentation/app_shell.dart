@@ -1,26 +1,61 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/l10n/l10n_extensions.dart';
 import '../../../core/theme/app_tokens.dart';
+import '../../auth/controllers/auth_controller.dart';
+import '../../../shared/widgets/app_download_dialog.dart';
 
-class AppShell extends StatelessWidget {
+class AppShell extends ConsumerStatefulWidget {
   const AppShell({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
+  @override
+  ConsumerState<AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends ConsumerState<AppShell> {
   void _onTap(int index) {
-    navigationShell.goBranch(
+    widget.navigationShell.goBranch(
       index,
-      initialLocation: index == navigationShell.currentIndex,
+      initialLocation: index == widget.navigationShell.currentIndex,
     );
+  }
+
+  void _consumeAppDownloadPrompt() {
+    if (!kIsWeb || !mounted) return;
+    if (!ref.read(pendingAppDownloadPromptProvider)) return;
+    ref.read(pendingAppDownloadPromptProvider.notifier).state = false;
+    showAppDownloadDialog(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (kIsWeb) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _consumeAppDownloadPrompt();
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      ref.listen<bool>(pendingAppDownloadPromptProvider, (previous, next) {
+        if (next != true) return;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _consumeAppDownloadPrompt();
+        });
+      });
+    }
+
     final l10n = context.l10n;
     final wide = MediaQuery.sizeOf(context).width >= 900;
+    final navigationShell = widget.navigationShell;
 
     final destinations = [
       NavigationDestination(

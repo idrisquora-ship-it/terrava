@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../core/constants/app_routes.dart';
 import '../../../core/l10n/l10n_extensions.dart';
 import '../../../core/theme/app_tokens.dart';
-import '../../../core/theme/map_styles.dart';
 import '../../../shared/models/place_models.dart';
 import '../../../shared/services/location_service.dart';
 import '../../../shared/services/map_clusterer.dart';
 import '../../../shared/services/places_service.dart';
 import '../../../shared/widgets/place_cards.dart';
+import '../../../shared/widgets/terrava_map.dart';
 
 class ExploreMapScreen extends ConsumerStatefulWidget {
   const ExploreMapScreen({super.key});
@@ -21,8 +22,8 @@ class ExploreMapScreen extends ConsumerStatefulWidget {
 }
 
 class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
-  GoogleMapController? _controller;
-  Set<Marker> _markers = {};
+  final _mapController = MapController();
+  List<Marker> _markers = [];
   List<PlaceSummary> _places = [];
   bool _loading = false;
   double _zoom = 14;
@@ -36,57 +37,60 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
             radiusMeters: 1800,
           );
       _places = places.where((p) => p.lat != null && p.lng != null).toList();
-      await _rebuildMarkers();
+      _rebuildMarkers();
     } finally {
       if (mounted) setState(() => _loading = false);
     }
   }
 
-  Future<void> _rebuildMarkers() async {
+  void _rebuildMarkers() {
     if (!mounted) return;
-    final l10n = context.l10n;
     final buckets = const MapClusterer().cluster(places: _places, zoom: _zoom);
-    final markers = <Marker>{};
+    final markers = <Marker>[];
 
     for (final bucket in buckets) {
       if (bucket.items.length == 1) {
         final p = bucket.items.first.place;
         markers.add(
-          Marker(
-            markerId: MarkerId(p.placeId),
-            position: LatLng(p.lat!, p.lng!),
-            icon: await clusterIcon(1),
-            infoWindow: InfoWindow(
-              title: p.name,
-              snippet:
-                  p.rating == null ? null : '★ ${p.rating!.toStringAsFixed(1)}',
-            ),
+          terravaPlaceMarker(
+            point: LatLng(p.lat!, p.lng!),
+            label: p.name,
             onTap: () => _showPlaceSheet(p),
           ),
         );
       } else {
-        final id =
-            'cluster_${bucket.center.latitude}_${bucket.center.longitude}';
         markers.add(
           Marker(
-            markerId: MarkerId(id),
-            position: bucket.center,
-            icon: await clusterIcon(bucket.items.length),
-            infoWindow: InfoWindow(
-              title: l10n.mapClusterPlaces(bucket.items.length),
-              snippet: l10n.mapTapToZoom,
+            point: bucket.center,
+            width: 44,
+            height: 44,
+            child: GestureDetector(
+              onTap: () {
+                _mapController.move(bucket.center, _zoom + 2);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColors.sage,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                ),
+                child: Text(
+                  '${bucket.items.length}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
             ),
-            onTap: () async {
-              await _controller?.animateCamera(
-                CameraUpdate.newLatLngZoom(bucket.center, _zoom + 2),
-              );
-            },
           ),
         );
       }
     }
 
-    if (mounted) setState(() => _markers = markers);
+    setState(() => _markers = markers);
   }
 
   void _showPlaceSheet(PlaceSummary place) {
@@ -113,7 +117,6 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
     final l10n = context.l10n;
     final locationAsync = ref.watch(currentLocationProvider);
     final initial = locationAsync.valueOrNull;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final center = LatLng(
       initial?.lat ?? 6.5244,
       initial?.lng ?? 3.3792,
@@ -122,27 +125,20 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: CameraPosition(target: center, zoom: 14),
-            style: isDark ? TerravaMapStyles.dark : TerravaMapStyles.light,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            compassEnabled: false,
-            mapToolbarEnabled: false,
+          TerravaMap(
+            mapController: _mapController,
+            center: center,
+            zoom: 14,
             markers: _markers,
-            onMapCreated: (controller) async {
-              _controller = controller;
-              await _loadNearby(center);
-            },
-            onCameraMove: (pos) => _zoom = pos.zoom,
-            onCameraIdle: () async {
-              final bounds = await _controller?.getVisibleRegion();
-              if (bounds == null) return;
-              final mid = LatLng(
-                (bounds.northeast.latitude + bounds.southwest.latitude) / 2,
-                (bounds.northeast.longitude + bounds.southwest.longitude) / 2,
-              );
-              await _loadNearby(mid);
+            myLocation: initial == null
+                ? null
+                : LatLng(initial.lat, initial.lng),
+            showMyLocationDot: initial != null,
+            onMapReady: (_) => _loadNearby(center),
+            onPositionChanged: (camera) {
+              _zoom = camera.zoom;
+              // Debounce-ish: reload when idle enough via gesture end is hard;
+              // reload on significant moves from my-location / initial only.
             },
           ),
           SafeArea(
@@ -182,9 +178,7 @@ class _ExploreMapScreenState extends ConsumerState<ExploreMapScreen> {
                             .currentPosition();
                         if (loc == null) return;
                         final target = LatLng(loc.lat, loc.lng);
-                        await _controller?.animateCamera(
-                          CameraUpdate.newLatLngZoom(target, 15),
-                        );
+                        _mapController.move(target, 15);
                         await _loadNearby(target);
                       },
                       icon: const Icon(Icons.my_location_rounded),
