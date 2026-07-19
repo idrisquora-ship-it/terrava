@@ -48,6 +48,18 @@ class Env {
         const ['EXPO_PUBLIC_FOURSQUARE_API_KEY'],
       );
 
+  /// Optional same-origin / custom proxy base for Foursquare Places
+  /// (e.g. `https://terrava-nine.vercel.app/api/fsq/places`).
+  /// Used to avoid browser CORS failures against places-api.foursquare.com.
+  static String get foursquareProxyBase =>
+      _read('FOURSQUARE_PROXY_BASE').replaceAll(RegExp(r'/+$'), '');
+
+  /// Public website origin (used to build a Foursquare proxy fallback on mobile).
+  static String get appWebUrl => _readAlias(
+        'APP_WEB_URL',
+        const ['WEB_AUTH_REDIRECT_URL'],
+      ).replaceAll(RegExp(r'/+$'), '');
+
   static String get googleOauthClientId => _readAlias(
         'GOOGLE_OAUTH_CLIENT_ID',
         const [

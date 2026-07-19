@@ -72,6 +72,9 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
+          await ref
+              .read(locationServiceProvider)
+              .resolveCurrent(forceRefresh: true);
           ref.invalidate(currentLocationProvider);
           ref.invalidate(nearbyPlacesProvider);
           ref.invalidate(popularPlacesProvider);
@@ -170,9 +173,22 @@ class HomeScreen extends ConsumerWidget {
                     final category = kPlaceCategories[index];
                     return InkWell(
                       borderRadius: AppRadius.mdAll,
-                      onTap: () => context.push(
-                        AppRoutes.categoryPath(category.googleType),
-                      ),
+                      onTap: () {
+                        final loc = locationAsync.asData?.value;
+                        if (loc != null) {
+                          context.push(
+                            AppRoutes.categoryPathAt(
+                              category.googleType,
+                              loc.lat,
+                              loc.lng,
+                            ),
+                          );
+                        } else {
+                          context.push(
+                            AppRoutes.categoryPath(category.googleType),
+                          );
+                        }
+                      },
                       child: SizedBox(
                         width: 84,
                         child: Column(

@@ -32,6 +32,8 @@ class NeighborhoodScoreResult extends Equatable {
     required this.groups,
     required this.summary,
     required this.radiusMeters,
+    this.securityScore = 0,
+    this.securitySummary = '',
   });
 
   final double overall;
@@ -39,10 +41,16 @@ class NeighborhoodScoreResult extends Equatable {
   final String summary;
   final int radiusMeters;
 
+  /// Amenity-based security signals (0–100). Not official crime data.
+  final double securityScore;
+  final String securitySummary;
+
   Map<String, dynamic> toJson() => {
         'overall': overall,
         'radiusMeters': radiusMeters,
         'summary': summary,
+        'securityScore': securityScore,
+        'securitySummary': securitySummary,
         'groups': groups
             .map(
               (g) => {
@@ -62,6 +70,8 @@ class NeighborhoodScoreResult extends Equatable {
       overall: (json['overall'] as num).toDouble(),
       radiusMeters: json['radiusMeters'] as int? ?? 1500,
       summary: json['summary'] as String? ?? '',
+      securityScore: (json['securityScore'] as num?)?.toDouble() ?? 0,
+      securitySummary: json['securitySummary'] as String? ?? '',
       groups: (json['groups'] as List<dynamic>? ?? [])
           .map(
             (g) => GroupScore(
@@ -78,7 +88,7 @@ class NeighborhoodScoreResult extends Equatable {
   }
 
   @override
-  List<Object?> get props => [overall, groups, summary];
+  List<Object?> get props => [overall, groups, summary, securityScore];
 }
 
 class NeighborhoodScoreEngine {
@@ -158,6 +168,8 @@ class NeighborhoodScoreEngine {
 
   static Set<String> get allPlaceTypes => {
         for (final g in groupDefs) ...g.types,
+        'police',
+        'fire_station',
       };
 
   NeighborhoodScoreResult compute({
@@ -165,7 +177,7 @@ class NeighborhoodScoreEngine {
     required double lng,
     required Map<String, List<PlaceSummary>> placesByType,
     String? areaName,
-    int radiusMeters = 1500,
+    int radiusMeters = 4000,
   }) {
     final groupScores = <GroupScore>[];
 
@@ -230,6 +242,16 @@ class NeighborhoodScoreEngine {
     final food = groupScores.firstWhere((g) => g.id == 'food');
     final transport = groupScores.firstWhere((g) => g.id == 'transport');
 
+    final security = _securitySignals(
+      lat: lat,
+      lng: lng,
+      placesByType: placesByType,
+      healthCount: health.count,
+      foodCount: food.count,
+      essentialsCount: essentials.count,
+      radiusMeters: radiusMeters,
+    );
+
     final summary =
         '$name scores ${overall.round()}/100 for everyday convenience '
         '(amenity access — not crime or official livability). '
@@ -245,7 +267,58 @@ class NeighborhoodScoreEngine {
       groups: groupScores,
       summary: summary,
       radiusMeters: radiusMeters,
+      securityScore: security.score,
+      securitySummary: security.summary,
     );
+  }
+
+  static ({double score, String summary}) _securitySignals({
+    required double lat,
+    required double lng,
+    required Map<String, List<PlaceSummary>> placesByType,
+    required int healthCount,
+    required int foodCount,
+    required int essentialsCount,
+    required int radiusMeters,
+  }) {
+    final police = placesByType['police'] ?? const <PlaceSummary>[];
+    final fire = placesByType['fire_station'] ?? const <PlaceSummary>[];
+    final uniqueEmergency = <String, PlaceSummary>{};
+    for (final p in [...police, ...fire]) {
+      uniqueEmergency[p.placeId] = p;
+    }
+    final emergencyCount = uniqueEmergency.length;
+
+    double? nearestEmergency;
+    for (final p in uniqueEmergency.values) {
+      if (p.lat == null || p.lng == null) continue;
+      final d = _haversineM(lat, lng, p.lat!, p.lng!);
+      nearestEmergency =
+          nearestEmergency == null ? d : min(nearestEmergency, d);
+    }
+
+    // Presence of emergency services + nearby medical + everyday activity.
+    final emergencyCoverage = _clamp(emergencyCount / 2.0, 0, 1);
+    final medicalCoverage = _clamp(healthCount / 3.0, 0, 1);
+    final activityCoverage =
+        _clamp((foodCount + essentialsCount) / 12.0, 0, 1);
+    final proximity = nearestEmergency == null
+        ? 0.15
+        : 1 - _clamp(nearestEmergency / 2500.0, 0, 1);
+
+    final score = 100 *
+        (0.40 * emergencyCoverage +
+            0.25 * medicalCoverage +
+            0.20 * proximity +
+            0.15 * activityCoverage);
+
+    final summary =
+        'Security signals ${score.round()}/100 (estimate from nearby '
+        'police/fire, hospitals, and everyday activity within '
+        '${(radiusMeters / 1000).toStringAsFixed(1)} km — not official crime data). '
+        'Police/fire nearby: $emergencyCount. Health options: $healthCount.';
+
+    return (score: score, summary: summary);
   }
 
   static double _clamp(double v, double minV, double maxV) =>

@@ -49,16 +49,25 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _bootstrap());
   }
 
-  Future<void> _bootstrap() async {
+  Future<void> _bootstrap({bool forceRefresh = false}) async {
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+
     LatLng? center;
-    if (widget.lat != null && widget.lng != null) {
+    if (!forceRefresh && widget.lat != null && widget.lng != null) {
       center = LatLng(widget.lat!, widget.lng!);
     } else {
-      ref.invalidate(currentLocationProvider);
-      final result = await ref.read(locationServiceProvider).resolveCurrent();
+      // Prefer the cached home-screen fix; only force a new GPS read on retry.
+      final result = await ref
+          .read(locationServiceProvider)
+          .resolveCurrent(forceRefresh: forceRefresh);
       if (!mounted) return;
       if (result.location != null) {
         center = LatLng(result.location!.lat, result.location!.lng);
+        // Keep Riverpod in sync without discarding a good cache on open.
+        ref.invalidate(currentLocationProvider);
       } else {
         setState(() {
           _loading = false;
@@ -92,7 +101,7 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
             lat: target.latitude,
             lng: target.longitude,
             type: widget.type,
-            radiusMeters: 3000,
+            radiusMeters: 4000,
           );
       if (!mounted) return;
       _places = places.where((p) => p.lat != null && p.lng != null).toList();
@@ -314,7 +323,7 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
                       TerravaButton(
                         label: l10n.commonTryAgain,
                         expand: false,
-                        onPressed: _bootstrap,
+                        onPressed: () => _bootstrap(forceRefresh: true),
                       ),
                     ],
                   ),
@@ -336,32 +345,7 @@ class _CategoryMapScreenState extends ConsumerState<CategoryMapScreen> {
               color: Theme.of(context).cardTheme.color,
               child: IconButton(
                 tooltip: l10n.mapMyLocation,
-                onPressed: () async {
-                  ref.invalidate(currentLocationProvider);
-                  final result =
-                      await ref.read(locationServiceProvider).resolveCurrent();
-                  if (!mounted) return;
-                  final loc = result.location;
-                  if (loc == null) {
-                    setState(() {
-                      _error = switch (result.failure) {
-                        LocationFailureReason.permissionDenied =>
-                          context.l10n.locationPermissionNeeded,
-                        LocationFailureReason.serviceDisabled =>
-                          context.l10n.locationServicesDisabled,
-                        _ => context.l10n.locationUnavailable,
-                      };
-                    });
-                    return;
-                  }
-                  final target = LatLng(loc.lat, loc.lng);
-                  setState(() {
-                    _center = target;
-                    _error = null;
-                  });
-                  _mapController.move(target, 14);
-                  await _load(target);
-                },
+                onPressed: () => _bootstrap(forceRefresh: true),
                 icon: const Icon(Icons.my_location_rounded),
               ),
             ),

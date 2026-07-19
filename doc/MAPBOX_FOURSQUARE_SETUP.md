@@ -45,6 +45,17 @@ Terrava calls the **current** Places host (`https://places-api.foursquare.com`) 
 - `X-Places-Api-Version: 2025-06-17`
 - Category filter query param: `fsq_category_ids` (not the legacy `categories`)
 
+### Web / Vercel (required)
+
+Browsers cannot call Foursquare directly (CORS preflight fails → DioException / XMLHttpRequest). Deployed web uses the serverless proxy at `/api/fsq/*`.
+
+1. In **Vercel → Project → Settings → Environment Variables**, add:
+   - `FOURSQUARE_API_KEY` = same service key as `.env`
+2. Redeploy after adding the variable.
+3. Optional client overrides in `.env`:
+   - `APP_WEB_URL=https://your-app.vercel.app` (Android fallback proxy)
+   - `FOURSQUARE_PROXY_BASE=https://your-app.vercel.app/api/fsq/places`
+
 Free allowance is limited (hundreds of Pro calls/month); enough to develop. Enable billing in the Foursquare console if you need more.
 
 **Without this key:** Mapbox still draws the map and can search areas/cities, but Home “Nearby”, category map (Restaurants, Markets, …), and place details that load POIs will fail until the key is set.

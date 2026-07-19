@@ -321,6 +321,19 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String securityScore(int score) {
+    return 'Security signals $score/100';
+  }
+
+  @override
+  String get securityScoreHint =>
+      'Estimate from nearby police/fire, hospitals, and everyday activity — not official crime statistics.';
+
+  @override
+  String get placesNetworkError =>
+      'Could not load nearby places. Check your connection and try again.';
+
+  @override
   String weatherSummary(
       int temp, String condition, int feelsLike, int humidity) {
     return '$temp°C · $condition · percepiti $feelsLike°C · umidità $humidity%';

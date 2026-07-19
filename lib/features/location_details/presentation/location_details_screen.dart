@@ -40,7 +40,7 @@ final locationCategoryProvider = FutureProvider.autoDispose
         lat: args.point.lat,
         lng: args.point.lng,
         type: args.type,
-        radiusMeters: 1500,
+        radiusMeters: 4000,
       );
 });
 
@@ -166,6 +166,18 @@ class _LocationDetailsScreenState extends ConsumerState<LocationDetailsScreen> {
                               foodCount: groupCount('food'),
                               transportCount: groupCount('transport'),
                             ),
+                          ),
+                          const SizedBox(height: AppSpacing.md),
+                          Text(
+                            l10n.securityScore(score.securityScore.round()),
+                            style: theme.textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: AppSpacing.xs),
+                          Text(
+                            score.securitySummary.isNotEmpty
+                                ? score.securitySummary
+                                : l10n.securityScoreHint,
+                            style: theme.textTheme.bodyMedium,
                           ),
                           const SizedBox(height: AppSpacing.md),
                           Wrap(
@@ -355,7 +367,13 @@ class _CategoryRow extends ConsumerWidget {
         ),
         error: (e, _) => Padding(
           padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Text(e.toString()),
+          child: Text(
+            e.toString().contains('DioException') ||
+                    e.toString().contains('XMLHttpRequest') ||
+                    e.toString().contains('connection error')
+                ? context.l10n.placesNetworkError
+                : e.toString(),
+          ),
         ),
       ),
     );

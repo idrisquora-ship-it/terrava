@@ -2,7 +2,7 @@
   "version": 2,
   "outputDirectory": "public",
   "rewrites": [
-    { "source": "/((?!downloads/).*)", "destination": "/index.html" }
+    { "source": "/((?!downloads/|api/).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

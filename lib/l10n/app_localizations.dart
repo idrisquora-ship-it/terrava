@@ -702,6 +702,24 @@ abstract class AppLocalizations {
   /// **'Amenity score {score}/100'**
   String amenityScore(int score);
 
+  /// No description provided for @securityScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Security signals {score}/100'**
+  String securityScore(int score);
+
+  /// No description provided for @securityScoreHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimate from nearby police/fire, hospitals, and everyday activity — not official crime statistics.'**
+  String get securityScoreHint;
+
+  /// No description provided for @placesNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load nearby places. Check your connection and try again.'**
+  String get placesNetworkError;
+
   /// No description provided for @weatherSummary.
   ///
   /// In en, this message translates to:

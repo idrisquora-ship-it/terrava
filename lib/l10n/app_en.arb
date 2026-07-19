@@ -117,6 +117,14 @@
       "score": {"type": "int"}
     }
   },
+  "securityScore": "Security signals {score}/100",
+  "@securityScore": {
+    "placeholders": {
+      "score": {"type": "int"}
+    }
+  },
+  "securityScoreHint": "Estimate from nearby police/fire, hospitals, and everyday activity — not official crime statistics.",
+  "placesNetworkError": "Could not load nearby places. Check your connection and try again.",
   "weatherSummary": "{temp}°C · {condition} · feels {feelsLike}°C · humidity {humidity}%",
   "@weatherSummary": {
     "placeholders": {

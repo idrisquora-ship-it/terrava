@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/config/env.dart';
@@ -31,8 +34,66 @@ class PlacesService {
   final String language;
 
   static const _mapbox = 'https://api.mapbox.com';
-  // Current Foursquare Places API (Bearer service key).
-  static const _fsq = 'https://places-api.foursquare.com/places';
+
+  /// On deployed web, call the same-origin Vercel proxy (avoids Foursquare CORS).
+  /// On Android / local web, call Foursquare directly (with proxy fallback).
+  String get _fsqPlacesBase {
+    final override = Env.foursquareProxyBase;
+    if (override.isNotEmpty) return override;
+    if (kIsWeb && !_isLocalWebHost) {
+      return '${Uri.base.origin}/api/fsq/places';
+    }
+    return 'https://places-api.foursquare.com/places';
+  }
+
+  String? get _fsqFallbackBase {
+    final configured = Env.foursquareProxyBase;
+    if (configured.isNotEmpty) return null;
+    final web = Env.appWebUrl;
+    if (web.isNotEmpty) {
+      final origin = web.replaceAll(RegExp(r'/+$'), '');
+      return '$origin/api/fsq/places';
+    }
+    if (kIsWeb && !_isLocalWebHost) return null;
+    // Last-resort public deploy proxy when direct Foursquare is blocked.
+    return 'https://terrava-nine.vercel.app/api/fsq/places';
+  }
+
+  bool get _isLocalWebHost {
+    final host = Uri.base.host;
+    return host == 'localhost' ||
+        host == '127.0.0.1' ||
+        host.endsWith('.local');
+  }
+
+  bool _isProxyBase(String base) => !base.contains('places-api.foursquare.com');
+
+  Future<Response<Map<String, dynamic>>> _fsqGet(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Future<Response<Map<String, dynamic>>> once(String base) {
+      return _dio.get<Map<String, dynamic>>(
+        '$base$path',
+        queryParameters: queryParameters,
+      );
+    }
+
+    try {
+      return await once(_fsqPlacesBase);
+    } on DioException catch (e) {
+      final fallback = _fsqFallbackBase;
+      final connectionIssue = e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.unknown ||
+          e.type == DioExceptionType.connectionTimeout;
+      if (fallback == null ||
+          fallback == _fsqPlacesBase ||
+          !connectionIssue) {
+        rethrow;
+      }
+      return once(fallback);
+    }
+  }
 
   /// Photos are Premium on Foursquare; Pro tier returns no photo URLs.
   Map<String, String> get photoHeaders => const {};
@@ -48,38 +109,66 @@ class PlacesService {
     String? keyword,
     int radiusMeters = 1500,
   }) async {
-    if (!Env.hasValidFoursquareConfig) {
+    if (!_isProxyBase(_fsqPlacesBase) && !Env.hasValidFoursquareConfig) {
       throw PlacesApiException(
         'CONFIG',
         'FOURSQUARE_API_KEY is missing. Add it to .env (see doc/MAPBOX_FOURSQUARE_SETUP.md).',
       );
     }
 
-    final category = type == null ? null : categoryForTypeKey(type);
-    final queryParameters = <String, dynamic>{
-      'll': '$lat,$lng',
-      'radius': radiusMeters.clamp(1, 100000),
-      'limit': 50,
-      if (category != null && category.fsqCategoryIds.isNotEmpty)
-        'fsq_category_ids': category.fsqCategoryIds.join(','),
-      if (keyword != null && keyword.trim().isNotEmpty) 'query': keyword.trim(),
-      if (keyword == null &&
-          category == null &&
-          type != null &&
-          type.trim().isNotEmpty)
-        'query': type.replaceAll('_', ' '),
-    };
+    final categoryIds = type == null ? const <String>[] : fsqCategoryIdsForType(type);
+    final effectiveRadius = radiusMeters.clamp(1, 100000);
 
-    final response = await _dio.get<Map<String, dynamic>>(
-      '$_fsq/search',
-      queryParameters: queryParameters,
-    );
+    Future<List<PlaceSummary>> run({
+      List<String>? fsqIds,
+      String? query,
+    }) async {
+      final response = await _fsqGet(
+        '/search',
+        queryParameters: {
+          'll': '$lat,$lng',
+          'radius': effectiveRadius,
+          'limit': 50,
+          if (fsqIds != null && fsqIds.isNotEmpty)
+            'fsq_category_ids': fsqIds.join(','),
+          if (query != null && query.trim().isNotEmpty) 'query': query.trim(),
+        },
+      );
+      return _parseAndFilterNearby(
+        response.data?['results'] as List<dynamic>? ?? [],
+        lat: lat,
+        lng: lng,
+        radiusMeters: effectiveRadius,
+      );
+    }
 
-    final results = response.data?['results'] as List<dynamic>? ?? [];
-    return results
-        .map((raw) => mapFoursquarePlaceSummary(raw as Map<String, dynamic>))
-        .where((p) => p.placeId.isNotEmpty)
+    // 1) Prefer category IDs when available.
+    if (categoryIds.isNotEmpty) {
+      final byCategory = await run(fsqIds: categoryIds);
+      if (byCategory.isNotEmpty) return byCategory;
+    }
+
+    // 2) Fallback: keyword query (critical for sparse Foursquare coverage in NG).
+    final fallbackQuery = keyword?.trim().isNotEmpty == true
+        ? keyword!.trim()
+        : (type != null ? searchKeywordForType(type) : null);
+    if (fallbackQuery != null && fallbackQuery.isNotEmpty) {
+      final byQuery = await run(query: fallbackQuery);
+      if (byQuery.isNotEmpty) return byQuery;
+    }
+
+    // 3) Last resort untyped nearby, then soft-filter by type keyword in name.
+    final all = await run();
+    if (type == null || type.isEmpty) return all;
+    final needle = (fallbackQuery ?? type).toLowerCase().replaceAll('_', ' ');
+    final soft = all
+        .where(
+          (p) =>
+              p.name.toLowerCase().contains(needle) ||
+              p.types.any((t) => t.contains(needle.replaceAll(' ', '_'))),
+        )
         .toList();
+    return soft.isNotEmpty ? soft : all;
   }
 
   Future<List<PlaceSummary>> textSearch(
@@ -87,9 +176,11 @@ class PlacesService {
     double? lat,
     double? lng,
   }) async {
-    if (!Env.hasValidFoursquareConfig) return [];
-    final response = await _dio.get<Map<String, dynamic>>(
-      '$_fsq/search',
+    if (!_isProxyBase(_fsqPlacesBase) && !Env.hasValidFoursquareConfig) {
+      return [];
+    }
+    final response = await _fsqGet(
+      '/search',
       queryParameters: {
         'query': query,
         if (lat != null && lng != null) 'll': '$lat,$lng',
@@ -98,13 +189,26 @@ class PlacesService {
       },
     );
     final results = response.data?['results'] as List<dynamic>? ?? [];
+    if (lat != null && lng != null) {
+      return _parseAndFilterNearby(
+        results,
+        lat: lat,
+        lng: lng,
+        radiusMeters: 50000,
+      );
+    }
     return results
         .map((raw) => mapFoursquarePlaceSummary(raw as Map<String, dynamic>))
         .where((p) => p.placeId.isNotEmpty)
         .toList();
   }
 
-  Future<List<AutocompleteSuggestion>> autocomplete(String input) async {
+  Future<List<AutocompleteSuggestion>> autocomplete(
+    String input, {
+    double? proximityLat,
+    double? proximityLng,
+    String country = 'ng',
+  }) async {
     if (input.trim().length < 2) return [];
     if (!Env.hasValidMapboxConfig) {
       throw PlacesApiException(
@@ -120,60 +224,35 @@ class PlacesService {
         'autocomplete': true,
         'limit': 8,
         'language': language,
+        'country': country,
+        'types':
+            'address,poi,place,locality,neighborhood,district,postcode,region',
+        if (proximityLat != null && proximityLng != null)
+          'proximity': '$proximityLng,$proximityLat',
       },
     );
 
     final features = response.data?['features'] as List<dynamic>? ?? [];
-    return features.map((raw) {
-      final map = raw as Map<String, dynamic>;
-      final placeName = map['place_name'] as String? ?? '';
-      final text = map['text'] as String? ?? placeName;
-      final center = map['center'] as List<dynamic>?;
-      final lng = center != null && center.isNotEmpty
-          ? (center[0] as num).toDouble()
-          : null;
-      final lat = center != null && center.length > 1
-          ? (center[1] as num).toDouble()
-          : null;
-      final types = (map['place_type'] as List<dynamic>? ?? [])
-          .map((e) => '$e')
-          .toList();
-      final context = map['context'] as List<dynamic>?;
-      String? secondary;
-      if (placeName.contains(',')) {
-        secondary = placeName.substring(placeName.indexOf(',') + 1).trim();
-      } else if (context != null && context.isNotEmpty) {
-        secondary = (context.first as Map)['text'] as String?;
-      }
-
-      return AutocompleteSuggestion(
-        placeId: map['id'] as String? ?? placeName,
-        description: placeName,
-        mainText: text,
-        secondaryText: secondary,
-        lat: lat,
-        lng: lng,
-        isPoi: types.contains('poi'),
-      );
-    }).toList();
+    return features.map(_mapboxFeatureToSuggestion).toList();
   }
 
   Future<PlaceDetails> placeDetails(String placeId) async {
-    if (!Env.hasValidFoursquareConfig) {
+    if (!_isProxyBase(_fsqPlacesBase) && !Env.hasValidFoursquareConfig) {
       throw PlacesApiException('CONFIG', 'FOURSQUARE_API_KEY is missing.');
     }
 
-    final response = await _dio.get<Map<String, dynamic>>(
-      '$_fsq/$placeId',
-    );
+    final response = await _fsqGet('/$placeId');
     final data = response.data;
     if (data == null) throw StateError('Place not found');
     return mapFoursquarePlaceDetails(data);
   }
 
   Future<({double lat, double lng, String? formattedAddress})?> geocode(
-    String query,
-  ) async {
+    String query, {
+    double? proximityLat,
+    double? proximityLng,
+    String country = 'ng',
+  }) async {
     if (!Env.hasValidMapboxConfig) {
       throw PlacesApiException('CONFIG', 'MAPBOX_ACCESS_TOKEN is missing.');
     }
@@ -181,19 +260,32 @@ class PlacesService {
     final response = await _dio.get<Map<String, dynamic>>(
       '$_mapbox/geocoding/v5/mapbox.places/$encoded.json',
       queryParameters: {
-        'limit': 1,
+        'limit': 5,
         'language': language,
+        'country': country,
+        'types':
+            'address,poi,place,locality,neighborhood,district,postcode,region',
+        if (proximityLat != null && proximityLng != null)
+          'proximity': '$proximityLng,$proximityLat',
       },
     );
     final features = response.data?['features'] as List<dynamic>? ?? [];
-    if (features.isEmpty) return null;
-    final first = features.first as Map<String, dynamic>;
-    final center = first['center'] as List<dynamic>;
-    return (
-      lng: (center[0] as num).toDouble(),
-      lat: (center[1] as num).toDouble(),
-      formattedAddress: first['place_name'] as String?,
-    );
+    if (features.isEmpty) {
+      // Retry without country filter in case the place spans borders / aliasing.
+      final worldwide = await _dio.get<Map<String, dynamic>>(
+        '$_mapbox/geocoding/v5/mapbox.places/$encoded.json',
+        queryParameters: {
+          'limit': 1,
+          'language': language,
+          if (proximityLat != null && proximityLng != null)
+            'proximity': '$proximityLng,$proximityLat',
+        },
+      );
+      final alt = worldwide.data?['features'] as List<dynamic>? ?? [];
+      if (alt.isEmpty) return null;
+      return _featureCenter(alt.first as Map<String, dynamic>);
+    }
+    return _featureCenter(features.first as Map<String, dynamic>);
   }
 
   Future<({String? formattedAddress})?> reverseGeocode({
@@ -260,6 +352,66 @@ class PlacesService {
     );
   }
 
+  ({double lat, double lng, String? formattedAddress}) _featureCenter(
+    Map<String, dynamic> feature,
+  ) {
+    final center = feature['center'] as List<dynamic>;
+    return (
+      lng: (center[0] as num).toDouble(),
+      lat: (center[1] as num).toDouble(),
+      formattedAddress: feature['place_name'] as String?,
+    );
+  }
+
+  AutocompleteSuggestion _mapboxFeatureToSuggestion(dynamic raw) {
+    final map = raw as Map<String, dynamic>;
+    final placeName = map['place_name'] as String? ?? '';
+    final text = map['text'] as String? ?? placeName;
+    final center = map['center'] as List<dynamic>?;
+    final lng = center != null && center.isNotEmpty
+        ? (center[0] as num).toDouble()
+        : null;
+    final lat = center != null && center.length > 1
+        ? (center[1] as num).toDouble()
+        : null;
+    final types =
+        (map['place_type'] as List<dynamic>? ?? []).map((e) => '$e').toList();
+    final context = map['context'] as List<dynamic>?;
+    String? secondary;
+    if (placeName.contains(',')) {
+      secondary = placeName.substring(placeName.indexOf(',') + 1).trim();
+    } else if (context != null && context.isNotEmpty) {
+      secondary = (context.first as Map)['text'] as String?;
+    }
+
+    return AutocompleteSuggestion(
+      placeId: map['id'] as String? ?? placeName,
+      description: placeName,
+      mainText: text,
+      secondaryText: secondary,
+      lat: lat,
+      lng: lng,
+      isPoi: types.contains('poi'),
+    );
+  }
+
+  List<PlaceSummary> _parseAndFilterNearby(
+    List<dynamic> results, {
+    required double lat,
+    required double lng,
+    required int radiusMeters,
+  }) {
+    final maxDistance = radiusMeters * 1.15;
+    return results
+        .map((raw) => mapFoursquarePlaceSummary(raw as Map<String, dynamic>))
+        .where((p) => p.placeId.isNotEmpty && p.lat != null && p.lng != null)
+        .where((p) {
+          final d = _haversineM(lat, lng, p.lat!, p.lng!);
+          return d <= maxDistance;
+        })
+        .toList();
+  }
+
   String _formatDistance(double meters) {
     if (meters >= 1000) {
       return '${(meters / 1000).toStringAsFixed(1)} km';
@@ -274,6 +426,25 @@ class PlacesService {
     final m = mins % 60;
     return m == 0 ? '${h}h' : '${h}h ${m}m';
   }
+
+  static double _haversineM(
+    double lat1,
+    double lon1,
+    double lat2,
+    double lon2,
+  ) {
+    const r = 6371000.0;
+    final dLat = _rad(lat2 - lat1);
+    final dLon = _rad(lon2 - lon1);
+    final a = math.sin(dLat / 2) * math.sin(dLat / 2) +
+        math.cos(_rad(lat1)) *
+            math.cos(_rad(lat2)) *
+            math.sin(dLon / 2) *
+            math.sin(dLon / 2);
+    return 2 * r * math.atan2(math.sqrt(a), math.sqrt(1 - a));
+  }
+
+  static double _rad(double deg) => deg * math.pi / 180;
 }
 
 /// Maps a Foursquare Places API place JSON object into [PlaceSummary].

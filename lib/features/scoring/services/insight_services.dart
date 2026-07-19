@@ -20,6 +20,8 @@ final neighborhoodInsightProvider = FutureProvider.autoDispose
   final places = ref.watch(placesServiceProvider);
   const engine = NeighborhoodScoreEngine();
   final types = NeighborhoodScoreEngine.allPlaceTypes;
+  // Wider radius: Foursquare category data is sparse under 1.5 km in many NG cities.
+  const radiusMeters = 4000;
 
   final byType = <String, List<PlaceSummary>>{};
   await Future.wait(
@@ -29,7 +31,7 @@ final neighborhoodInsightProvider = FutureProvider.autoDispose
           lat: args.lat,
           lng: args.lng,
           type: type,
-          radiusMeters: 1500,
+          radiusMeters: radiusMeters,
         );
       } catch (_) {
         byType[type] = [];
@@ -42,6 +44,7 @@ final neighborhoodInsightProvider = FutureProvider.autoDispose
     lng: args.lng,
     placesByType: byType,
     areaName: args.label,
+    radiusMeters: radiusMeters,
   );
 
   WeatherSnapshot? weather;

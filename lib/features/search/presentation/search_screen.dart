@@ -22,7 +22,12 @@ final autocompleteProvider =
     FutureProvider.autoDispose<List<AutocompleteSuggestion>>((ref) async {
   final query = ref.watch(_searchQueryProvider);
   if (query.trim().length < 2) return [];
-  return ref.watch(placesServiceProvider).autocomplete(query);
+  final loc = await ref.watch(currentLocationProvider.future);
+  return ref.watch(placesServiceProvider).autocomplete(
+        query,
+        proximityLat: loc?.lat,
+        proximityLng: loc?.lng,
+      );
 });
 
 class SearchScreen extends ConsumerStatefulWidget {
@@ -93,7 +98,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
     final places = ref.read(placesServiceProvider);
     try {
-      final geo = await places.geocode(query);
+      final loc = await ref.read(currentLocationProvider.future);
+      final geo = await places.geocode(
+        query,
+        proximityLat: loc?.lat,
+        proximityLng: loc?.lng,
+      );
       if (geo != null) {
         await ref.read(historyRepositoryProvider).addSearch(
               query: query,
@@ -107,7 +117,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
       // Geocoder found nothing — try a Places text search biased to the
       // user's location so local names still resolve.
-      final loc = await ref.read(currentLocationProvider.future);
       final results = await places.textSearch(
         query,
         lat: loc?.lat,
